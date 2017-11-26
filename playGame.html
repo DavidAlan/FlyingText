@@ -1,0 +1,234 @@
+<!--
+//  Catch Flying Text program
+//  Copyright (c) 2017 David A. Freitag 
+//  http://software.dafreitag.com/
+//
+//  This program is free software: you can redistribute it and/or modify 
+//  it under the terms of the GNU General Public License as published by 
+//  the Free Software Foundation, either version 3 of the License, or 
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful, 
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+//  GNU General Public License for more details.
+//
+//  To receive a copy of the GNU General Public License, see
+//  <https://www.gnu.org/licenses/>.
+-->
+<!doctype html>
+<meta charset="utf-8">
+<title>Catch Flying Text - v2</title>
+<link rel="stylesheet" href="./js/flyingText.css">
+
+<section id="game">
+    <h1 id="gameLevelText">TBD</h1>
+    <div id="stage">
+        <canvas width="1200" height="600" style="border: 1px solid black"></canvas>
+        
+        <div class="popup" onclick="showPopUpWindow()"> 
+            <span class="popuptext" id="myPopup">tbd</span>
+        </div>
+        <p><p><p>
+            
+        <button id="pauseButton">Begin</button> 
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Correct:  
+        
+        &nbsp;&nbsp;&nbsp;
+        
+        <span id="playerPlusScore" style="font-weight:normal;color:yellow"></span>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Incorrect:
+        
+        &nbsp;&nbsp;&nbsp;
+        <span id="playerMinusScore" style="font-weight:normal;color:yellow"></span>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Equals:
+        &nbsp;&nbsp;&nbsp;
+        <span id="playerLevelScore" style="font-weight:normal;color:yellow"></span>
+        &nbsp;&nbsp;&nbsp;
+        / 
+        <span id="playerOutOfScore" style="font-weight:normal;color:yellow"></span>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Adjusted Total Points:
+        &nbsp;&nbsp;&nbsp;
+        <span id="playerTotalScore" style="font-weight:normal;color:yellow"></span>
+        
+        <p class="flyingObjectArea"  id="flyingObjectArea"></p>
+    </div>
+</section>
+
+<section id="completed_game">
+    <h1 id="completedHeader">Catch the Flying Text!</h1>
+    <div id="completed_stage">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            1. Variables  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_0" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            2. Constants  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_1" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            3. Variables and Constants   
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_2" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            4. Expressions  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_3" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            5. Calling Modules  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_4" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            6. Module Headers  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_5" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            7. Calling Functions  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_6" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            8. Function Headers  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_7" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            9. Modules and Functions  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_8" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            10. Booleans  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_9" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            11. If Statements  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_10" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            12. Loops  
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_11" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            13. Arrays   
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_12" style="font-weight:normal;color:yellow"></span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            14. OOP   
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_13" style="font-weight:normal;color:yellow"></span>
+
+        <p><p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="pausesNbr" style="font-weight:normal;color:aqua"></span>
+        &nbsp;&nbsp;
+        <span id="totalPauses" style="font-weight:normal;color:orange"></span>
+        
+        <p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="adjustedText1" style="font-weight:normal;color:orange"></span>
+            &nbsp;&nbsp;&nbsp;
+        <span id="scoresLevel_total" style="font-weight:normal;color:aqua"></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="adjustedText2" style="font-weight:normal;color:orange"></span>
+    </div>
+    <p>
+    <button id="beginButton">Begin</button> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="beginLevelText" style="font-weight:normal;color:orange"></span>
+    <select id="beginLevel">
+        <option value="beginVars">1. Variables</option>
+        <option value="beginConstants">2. Constants</option>
+        <option value="beginVarsAndConstants">3. Variables and Constants</option>
+        <option value="beginExpressions">4. Expressions</option>
+        <option value="beginCallingModules"> 5. Calling Modules</option>
+        <option value="beginModuleHeaders">6. Module Headers</option>
+        <option value="beginCallingFunctions">7. Calling Functions</option>
+        <option value="beginFunctionHeaders">8. Function Headers</option>
+        <option value="beginModulesAndFunctions">9. Modules and Functions</option>
+        <option value="beginBooleans">10. Booleans</option>
+        <option value="beginIfStatements">11. If Statements</option>
+        <option value="beginLoops">12. Loops</option>
+        <option value="beginArrays">13. Arrays</option>
+        <option value="beginOOP">14. OOP</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="endLevelText" style="font-weight:normal;color:orange"></span>
+    <select id="endLevel">
+        <option value="endVars">1. Variables</option>
+        <option value="endConstants">2. Constants</option>
+        <option value="endVarsAndConstants">3. Variables and Constants</option>
+        <option value="endExpressions">4. Expressions</option>
+        <option value="endCallingModules"> 5. Calling Modules</option>
+        <option value="endModuleHeaders">6. Module Headers</option>
+        <option value="endCallingFunctions">7. Calling Functions</option>
+        <option value="endFunctionHeaders">8. Function Headers</option>
+        <option value="endModulesAndFunctions">9. Modules and Functions</option>
+        <option value="endBooleans">10. Booleans</option>
+        <option value="endIfStatements">11. If Statements</option>
+        <option value="endLoops">12. Loops</option>
+        <option value="endArrays">13. Arrays</option>
+        <option value="endOOP">14. OOP</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="modeTypes">
+        <input type="Radio" id="mode1" Name="mode" Value="Mode1">&nbsp;&nbsp;Quick
+        &nbsp;&nbsp;&nbsp;
+        <input type="Radio" id="mode2" Name="mode" Value="Mode2" checked>&nbsp;&nbsp;Regular
+        &nbsp;&nbsp;&nbsp;
+        <input type="Radio" id="mode3" Name="mode" Value="Mode3">&nbsp;&nbsp;Sudden Death
+    </span>
+    
+    <div id="overlay">
+        <div id="overlayText">TBD</div> 
+    </div>
+</section>
+
+<script src="./js/globalConstants.js"></script>
+<script src="./js/globalVariables.js"></script>
+<script src="./js/buttons.js"></script>
+<script src="./js/textOverlay.js"></script>
+<script src="./js/popUpText.js"></script>
+
+<script src="./data/flyingVariables.js"></script>
+<script src="./data/flyingConstants.js"></script>
+<script src="./data/flyingVariablesAndConstants.js"></script>
+<script src="./data/flyingExpressions.js"></script>
+<script src="./data/flyingCallingModules.js"></script>
+<script src="./data/flyingModuleHeaders.js"></script>
+<script src="./data/flyingCallingFunctions.js"></script>
+<script src="./data/flyingFunctionHeaders.js"></script>
+<script src="./data/flyingModsAndFunctions.js"></script>
+<script src="./data/flyingBooleans.js"></script>
+<script src="./data/flyingIfStatements.js"></script>
+<script src="./data/flyingLoops.js"></script>
+<script src="./data/flyingArrayStatements.js"></script>
+<script src="./data/flyingOOPstatements.js"></script>
+
+<script src="./js/introScreen.js"></script>
+<script src="./js/main.js"></script>
+
+<script src="./js/flyingObjects.js"></script>  
+
+<script>
+completed_game.style.display="block"; 
+game.style.display="none"; 
+
+displayIntroScreen();
+</script>
+</body>
