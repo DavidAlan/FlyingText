@@ -1,5 +1,5 @@
-Catch Flying Text program
-Copyright (c) 2017 David A. Freitag 
+Catch Flying Text program  
+Copyright (c) 2017 David A. Freitag  
 http://software.dafreitag.com/
 
 This program is designed to help beginning programming students learn and deepen their understanding of various programming concepts and syntax. 
