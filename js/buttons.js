@@ -34,10 +34,13 @@ function pauseGame() {
 }
 function resumeGame() {
     document.getElementById("pauseButton").style.display = "inline-block";
-    document.getElementById("pauseButton").style.padding = "5px 10px 5px 10px";  // t,r,b,l
+    document.getElementById("pauseButton").style.padding = "5px 37px 5px 36px";  // t,r,b,l
     pauseButton.innerHTML = "Pause"; 
     gameState = PLAYING;
     pause = false;
+    turnOffOverlay();
+    turnOffOverlayResult();
+    endOfLevel = false;
     //console.log("---------- Resuming");
 }
 function hidePauseButton(){
@@ -128,8 +131,23 @@ function introClickHandler() {
     game.style.display="block"; 
     
     turnOffOverlay();
+    turnOffOverlayResult();
+    
+    var modeAndLevels   = document.getElementById("modeAndLevels");
+    var mAndL = "";
+    if ( mode == MODE_SUDDEN_DEATH) {
+        mAndL = "SD levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    }
+    if (mode == MODE_REGULAR) {
+        mAndL = "Regular levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    }
+    if (mode == MODE_QUICK) {
+        mAndL = "Quick levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    }
+    modeAndLevels.innerHTML = mAndL;
+        
     startGame();
-    pauseButton.innerHTML = " Begin Game "; 
+    pauseButton.innerHTML = " Pause ";     
 }
 
 //The pause-resume button
@@ -145,3 +163,9 @@ var beginButton = document.getElementById("beginButton");
 beginButton.style.cursor = "pointer";
 beginButton.addEventListener("click", introClickHandler, false);
 beginButton.style.padding = "5px 25px 5px 25px";  // t,r,b,l
+
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 80) {  //The letter p
+        showPraise = !showPraise;
+    }
+});

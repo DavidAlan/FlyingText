@@ -26,8 +26,10 @@ function turnOnOverlay(textNbr) {
             + "Do you know the difference between variables and constants?<br><br>"
             + "Play this game to test your knowledge!<br><br>"
             + "-----------------------------------------------------------------------------------------<br><br>"
-            + "-1 for letting a good statement go by; -2 for clicking on bad syntax.<br>"
+            + "-1 for letting a good statement go by or for clicking on bad syntax.<br>"
             + "And the more you pause the game, the more your score is reduced.<br>"
+            + "<br>"
+            + "Press the letter 'p' to to toggle Praise on or off.<br>"
             + "<br>"
             + "Choose from the options below and, when you are ready, <br>"
             + "click the Begin button to start the game.";
@@ -45,16 +47,80 @@ function turnOnOverlay(textNbr) {
             }
             break;
     }
-    
     var overlayText = document.getElementById("overlayText");
     overlayText.innerHTML = text;
-    
+
     document.getElementById("overlay").style.display = "block";
 }
 function turnOffOverlay() {
     document.getElementById("overlay").style.display = "none";
 }
+function turnOnGameFinishedOverlay() {
+    if (playerTotalPoints >= 5) {
+        displayGoodJobMessage();
+    } else {
+        displayCouldDoBetterMessage();
+    }
+}
+function displayGoodJobMessage() {    
+    var CONGRATS_TEXT_ARRAY_1 = 
+        ["Well Done!" 
+        ,"Good Job!" 
+        ,"Fabulous!"    
+        ,"That's right!"    
+        ,"Wow! Nice!"    
+        ,"Wow!" 
+        ,"Nice!"    
+        ,"Good Work!"    
+        ,"Fantastic!"    
+        ,"Good eye!" 
+        ,"You got this!"    
+        ,"You got it!"    
+        ,"Superstar!" 
+        ,"Legendary!"
+        ,"Wonderful!"
+        ,"Excellent!"
+        ,"Tremendous!" 
+        ,"Marvelous!"
+        ,"Amazing!"
+        ,"Great!" 
+        ,"Correct!"
+        ,"Clever!"
+        ,"Mad Skills!"    
+        ,"Awesome!" 
+        ,"UR Great!"
+        ];    
+        
+        var CONGRATS_TEXT_ARRAY_2 = 
+        ["I bet you have mad coding skills!"
+        ,"I want you on my team!"
+        ,"Everyone wants to be on your team!"
+        ,"Can you be on my team?"
+        ,"You are totally awesome!"
+        ];    
+        
+    
+    var text = CONGRATS_TEXT_ARRAY_1[getRandomNumber(1, CONGRATS_TEXT_ARRAY_1.length - 1)]
+             + "<br>"
+             + CONGRATS_TEXT_ARRAY_2[getRandomNumber(1, CONGRATS_TEXT_ARRAY_2.length - 1)]
+             + "<br><br>(Refresh this page to start over.)";
+    
+    var overlayText = document.getElementById("overlayText");
+    overlayText.innerHTML = text;
 
+    document.getElementById("overlay").style.display = "block";
+}
+function displayCouldDoBetterMessage() {    
+    
+    var text = "Nice work, but you could do better."
+            + "<br>"
+            + "Refresh this page and try again!";
+    
+    var overlayText = document.getElementById("overlayText");
+    overlayText.innerHTML = text;
+
+    document.getElementById("overlay").style.display = "block";
+}
 /*
 #overlayText{
     position: absolute; 

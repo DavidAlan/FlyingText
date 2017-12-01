@@ -64,8 +64,8 @@ function clickHandlerFlyingObjects() {
      //Find the mouse's x and y position
     var mouseX = event.layerX - canvas.offsetLeft;
     var mouseY = event.layerY - canvas.offsetTop;
-    
-    //console.log("\n------------------------mouse: " + mouseX + "," + mouseY);
+        
+    //console.log("\n------------------------mouse: " + mouseX + "," + mouseY);  //???????????????
     checkForHit(mouseX, mouseY);  
 }
 function createFlyingObjects(){  
@@ -147,7 +147,7 @@ function updateFlyingObjects() {
 
             if (flyingObjectArray[i].x < 2) {
                 if(flyingObjectArray[i].textTF === "true") {  //good syntax got past
-                    playerPlusPoints--;
+                    playerMinusPoints--;
                     updateScores();
                     
                     showPopUpWindow(flyingObjectArray[i].x, 
@@ -242,6 +242,7 @@ function checkForHit(xPos,yPos){
                     if (getRandomNumber(0,1) === 1) {
                         activateSlot();
                     }
+                    turnOnOverlayResult(xPos, yPos);
                     break;
                 } else {  //clicked on bad syntax
                     playerMinusPoints--;

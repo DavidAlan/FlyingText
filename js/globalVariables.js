@@ -17,6 +17,8 @@
 //  <https://www.gnu.org/licenses/>.
 }
 var gameLevel = 0;
+var endOfLevel = false;
+var showPraise = true;
 var firstGameLevel = 0;
 var lastGameLevel = 13;
 var levelArray = [];    //Array used to fly in text
@@ -65,6 +67,7 @@ var ifStatementsToAdv = 20;
 var loopsToAdv = 20;
 var arraysToAdv = 20;
 var oopToAdv = 20;
+
 
 //---------------------------------------------------------------------------
 

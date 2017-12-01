@@ -20,7 +20,8 @@ function startGame() {
     setTitleText();
     createFlyingObjects();
     render();
-    pauseGame();
+    resumeGame();
+    //pauseGame();
     update();
 }
 function update() {
@@ -30,15 +31,20 @@ function update() {
     switch(gameState) {
         case PLAYING:
             playGame();
-            render();
+            //render();
             break;
             
         case PAUSED:
+            if (endOfLevel) {
+                 turnOnEndOfLevelOverlay();
+            }
             break;
         //    
         case OVER: 
             levelPlusPoints [gameLevel] = playerPlusPoints;  
             levelMinusPoints[gameLevel] = playerMinusPoints; 
+            calculatePoints();
+            turnOnGameFinishedOverlay();
             endGame();
             gameState = STOP;
             break;
@@ -57,6 +63,10 @@ function render() {
 
     pageTitle   = document.getElementById("gameLevelText");
     pageTitle.innerHTML = titleText;
+    
+    if (endOfLevel) {
+         turnOnEndOfLevelOverlay();
+    }
 }
 function updateScores() {
     playerPlusScore.innerHTML  = playerPlusPoints;
@@ -86,6 +96,7 @@ function playGame() {
         levelMinusPoints[gameLevel] = playerMinusPoints; 
         
         gameLevel++;
+        endOfLevel = true;
         
         if (gameLevel <= lastGameLevel) {
             setTitleText();
@@ -93,30 +104,18 @@ function playGame() {
             pauseGame();
             render();          
         } else {
+            calculatePoints();
+            turnOnGameFinishedOverlay();
             endGame();
             gameState = STOP;
         }
+    } else {
+        render(); 
     }
 }
 function endGame() {
     gameState = STOP;
-
-    console.log("\n playerTotalPoints: " + playerTotalPoints
-            + "\n playerPlusPoints: " + playerPlusPoints
-            + "\n playerMinusPoints: " + playerMinusPoints
-            + "\n playerMinusPoints: " + playerMinusPoints   //Subtract twice to penalize player 
-            + "\n Math.floor(numberOfPauses / " + PAUSE_FACTOR +"): " 
-            + Math.floor(numberOfPauses / PAUSE_FACTOR)
-    );
-      
-    //Include the last level in the totals and the number of pauses
-    playerTotalPoints = 
-              playerTotalPoints 
-            + playerPlusPoints 
-            + playerMinusPoints
-            + playerMinusPoints   //Subtract twice to penalize player 
-            - Math.floor(numberOfPauses / PAUSE_FACTOR);
-
+    
     game.style.display="none";
 
     completed_game.style.display="block";
@@ -202,10 +201,26 @@ function endGame() {
     document.getElementById("beginLevel").style.display = "none";
     document.getElementById("endLevelText").style.display = "none";
     document.getElementById("endLevel").style.display = "none";
-    
     document.getElementById("modeTypes").style.display = "none";
     
     turnOverlayOn(2);
+}
+function calculatePoints() {
+    console.log("\n playerTotalPoints: " + playerTotalPoints
+            + "\n playerPlusPoints: " + playerPlusPoints
+            + "\n playerMinusPoints: " + playerMinusPoints
+            + "\n playerMinusPoints: " + playerMinusPoints   //Subtract twice to penalize player 
+            + "\n Math.floor(numberOfPauses / " + PAUSE_FACTOR +"): " 
+            + Math.floor(numberOfPauses / PAUSE_FACTOR)
+    );
+      
+    //Include the last level in the totals and the number of pauses
+    playerTotalPoints = 
+              playerTotalPoints 
+            + playerPlusPoints 
+            + playerMinusPoints
+            + playerMinusPoints   //Subtract twice to penalize player 
+            - Math.floor(numberOfPauses / PAUSE_FACTOR);
 }
 function setTitleText() {
     switch(gameLevel) {
@@ -267,7 +282,7 @@ function setTitleText() {
             break;
         case MODULES_AND_FUNCTIONS: 
             titleText = "Level " + (MODULES_AND_FUNCTIONS + 1)
-                    + " - Click: Valid Module and Function Calls and Headers";
+                    + " - Click: Mod & Function Calls & Headers";
             levelArray = MODULES_AND_FUNCTIONS_ARRAY;
             pointsNeededToAdvanceToNextLevel = modulesAndFunctionsToAdv;
             playerOutOfScore.innerHTML = modulesAndFunctionsToAdv;
