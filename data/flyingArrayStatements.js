@@ -27,6 +27,7 @@ var ARRAY_STATEMENTS_ARRAY =
        ,"employees[MIN][MAX] = 99#true#na" 
        ,"spongeBob[0] = 0#true#na" 
        ,"rockStars[140] = 7#true#na" 
+       ,"sales[7536] = 99#true#na" 
        ,'starshipNames[10] = "Enterprise"#true#na' 
        ,"Declare String ORCS_NAMES[3]#true#na" 
        ,"Declare String EMP_NAMES[69]#true#na" 
@@ -40,6 +41,8 @@ var ARRAY_STATEMENTS_ARRAY =
     
        ,"uName[Aaa] = YEAR#false#Variable not camelCase" 
        ,"empName[ ][ ] = iName#false#Missing Subscripts" 
+       ,"Sales[7536] = 99#false#Not camelCase" 
+       ,"employeeS[10] = 22#false#Not camelCase" 
        ,"isAlive[-1] = True#false#Cannot have a negative subscript" 
        ,"Declare Int myArray[ ]#false#Int is not pseudocode"  
        ,"Declare String [SIZE]#false#Missing variable name" 
