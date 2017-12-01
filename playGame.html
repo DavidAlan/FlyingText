@@ -18,17 +18,23 @@
 -->
 <!doctype html>
 <meta charset="utf-8">
-<title>Catch Flying Text - v2</title>
+<title>Catch Flying Text - v3</title>
 <link rel="stylesheet" href="./js/flyingText.css">
 
 <section id="game">
     <h1 id="gameLevelText">TBD</h1>
+    <div id="modeAndLevels" class="modeAndLevels"></div>
     <div id="stage">
         <canvas width="1200" height="600" style="border: 1px solid black"></canvas>
         
-        <div class="popup" onclick="showPopUpWindow()"> 
-            <span class="popuptext" id="myPopup">tbd</span>
+        <div id="overlay1">
+            <div id="overlayTextResult" class="overlayTextResult">TBD</div> 
         </div>
+        
+        <div class="popup" onclick="showPopUpWindow()"> 
+            <span id="myPopup" class="popuptext">tbd</span>
+        </div>
+        
         <p><p><p>
             
         <button id="pauseButton">Begin</button> 
@@ -203,6 +209,7 @@
 <script src="./js/globalVariables.js"></script>
 <script src="./js/buttons.js"></script>
 <script src="./js/textOverlay.js"></script>
+<script src="./js/textOverlayResult.js"></script>
 <script src="./js/popUpText.js"></script>
 
 <script src="./data/flyingVariables.js"></script>
