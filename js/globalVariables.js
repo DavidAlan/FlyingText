@@ -48,26 +48,25 @@ var numberOfPauses = 0;
 
 var initialNbrOfFlyingObjects = 5;
 
-var levelTitle = "";  
+var levelTitle = [];  
 var levelPlusPoints  = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var levelMinusPoints = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 //Score needed to advance to next level
-var variablesToAdv = 20; 
-var constantsToAdv = 20;
-var varsAndConstantsToAdv = 20;
-var expressionsToAdv = 20; 
-var callingModulesToAdv = 20;
-var moduleHeadersToAdv = 20;
-var callingFunctionsToAdv = 20;
-var functionHeadersToAdv = 20;
-var modulesAndFunctionsToAdv = 20;
-var booleansToAdv = 20;
-var ifStatementsToAdv = 20;
-var loopsToAdv = 20;
-var arraysToAdv = 20;
-var oopToAdv = 20;
-
+var ToAdvanceFromLevel1 = 20; 
+var ToAdvanceFromLevel2 = 20;
+var ToAdvanceFromLevel3 = 20;
+var ToAdvanceFromLevel4 = 20; 
+var ToAdvanceFromLevel5 = 20;
+var ToAdvanceFromLevel6 = 20;
+var ToAdvanceFromLevel7 = 20;
+var ToAdvanceFromLevel8 = 20;
+var ToAdvanceFromLevel9 = 20;
+var ToAdvanceFromLevel10 = 20;
+var ToAdvanceFromLevel11 = 20;
+var ToAdvanceFromLevel12 = 20;
+var ToAdvanceFromLevel13 = 20;
+var ToAdvanceFromLevel14 = 20;
 
 //---------------------------------------------------------------------------
 

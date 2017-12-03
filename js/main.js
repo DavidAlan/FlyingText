@@ -224,103 +224,103 @@ function calculatePoints() {
 }
 function setTitleText() {
     switch(gameLevel) {
-        case VARIABLES: 
-            titleText = "Level " + (VARIABLES + 1) 
-                    + " - Click: Good Variable Names";
-            levelArray = FLYING_VARIABLES_ARRAY;
-            pointsNeededToAdvanceToNextLevel = variablesToAdv;
-            playerOutOfScore.innerHTML = variablesToAdv;
+        case LEVEL_1: 
+            titleText = "Level " + (LEVEL_1 + 1) 
+                    + " - Click: Good " + levelTitle[LEVEL_1];
+            levelArray = LEVEL_1_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel1;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel1;
             break;
-        case CONSTANTS: 
-            titleText = "Level " + (CONSTANTS + 1)
-                    + " - Click: Good Constant Names";
-            levelArray = FLYING_CONSTANTS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = constantsToAdv;
-            playerOutOfScore.innerHTML = constantsToAdv;
+        case LEVEL_2: 
+            titleText = "Level " + (LEVEL_2 + 1)
+                    + " - Click: Good " + levelTitle[LEVEL_2];
+            levelArray = LEVEL_2_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel2;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel2;
             break;
-        case VARS_AND_CONSTANTS: 
-            titleText = "Level " + (VARS_AND_CONSTANTS + 1)
-                    + " - Click: Good Variables and Constant Names";
-            levelArray = FLYING_VARIABLES_AND_CONSTANTS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = varsAndConstantsToAdv;
-            playerOutOfScore.innerHTML = varsAndConstantsToAdv;
+        case LEVEL_3: 
+            titleText = "Level " + (LEVEL_3 + 1)
+                    + " - Click: Good " + levelTitle[LEVEL_3];
+            levelArray = LEVEL_3_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel3;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel3;
             break;
-        case EXPRESSIONS: 
-            titleText = "Level " + (EXPRESSIONS + 1)
-                    + " - Click: Valid Expressions";
-            levelArray = EXPRESSIONS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = expressionsToAdv;
-            playerOutOfScore.innerHTML = expressionsToAdv;
+        case LEVEL_4: 
+            titleText = "Level " + (LEVEL_4 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_4];
+            levelArray = LEVEL_4_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel4;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel4;
             break;
-        case CALLING_MODULES: 
-            titleText = "Level " + (CALLING_MODULES + 1)
-                    + " - Click: Valid Module Call Statements";
-            levelArray = CALLING_MODULES_ARRAY;
-            pointsNeededToAdvanceToNextLevel = callingModulesToAdv;
-            playerOutOfScore.innerHTML = callingModulesToAdv;
+        case LEVEL_5: 
+            titleText = "Level " + (LEVEL_5 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_5];
+            levelArray = LEVEL_5_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel5;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel6;
             break;
-        case MODULE_HEADERS: 
-            titleText = "Level " + (MODULE_HEADERS + 1)
-                    + " - Click: Valid Module Headers";
-            levelArray = MODULE_HEADERS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = moduleHeadersToAdv;
-            playerOutOfScore.innerHTML = moduleHeadersToAdv;
+        case LEVEL_6: 
+            titleText = "Level " + (LEVEL_6 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_6];
+            levelArray = LEVEL_6_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel6;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel6;
             break;
-        case CALLING_FUNCTIONS: 
-            titleText = "Level " + (CALLING_FUNCTIONS + 1)
-                    + " - Click: Valid Function Call Statements";
-            levelArray = CALLING_FUNCTIONS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = callingFunctionsToAdv;
-            playerOutOfScore.innerHTML = callingFunctionsToAdv;
+        case LEVEL_7: 
+            titleText = "Level " + (LEVEL_7 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_7];
+            levelArray = LEVEL_7_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel7;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel7;
             break;
-        case FUNCTION_HEADERS: 
-            titleText = "Level " + (FUNCTION_HEADERS + 1)
-                    + " - Click: Valid Function Headers";
-            levelArray = FUNCTION_HEADERS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = functionHeadersToAdv;
-            playerOutOfScore.innerHTML = functionHeadersToAdv;
+        case LEVEL_8: 
+            titleText = "Level " + (LEVEL_8 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_8];
+            levelArray = LEVEL_8_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel8;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel8;
             break;
-        case MODULES_AND_FUNCTIONS: 
-            titleText = "Level " + (MODULES_AND_FUNCTIONS + 1)
-                    + " - Click: Mod & Function Calls & Headers";
-            levelArray = MODULES_AND_FUNCTIONS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = modulesAndFunctionsToAdv;
-            playerOutOfScore.innerHTML = modulesAndFunctionsToAdv;
+        case LEVEL_9: 
+            titleText = "Level " + (LEVEL_9 + 1)
+                    + " - Click: " + levelTitle[LEVEL_9];
+            levelArray = LEVEL_9_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel9;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel9;
             break;
-        case BOOLEANS: 
-            titleText = "Level " + (BOOLEANS + 1)
-                    + " - Click: Boolean Expressions that Evaluate to TRUE";
-            levelArray = BOOLEANS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = booleansToAdv;
-            playerOutOfScore.innerHTML = booleansToAdv;
+        case LEVEL_10: 
+            titleText = "Level " + (LEVEL_10 + 1)
+                    + " - Click:  " + levelTitle[LEVEL_10] + EXTRA_TEXT_LEVEL_10;
+            levelArray = LEVEL_10_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel10;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel10;
             break;
-        case IF_STATEMENTS: 
-            titleText = "Level " + (IF_STATEMENTS + 1)
-                    + " - Click: Valid If Statements";
-            levelArray = IF_STATEMENTS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ifStatementsToAdv;
-            playerOutOfScore.innerHTML = ifStatementsToAdv;
+        case LEVEL_11: 
+            titleText = "Level " + (LEVEL_11 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_11];
+            levelArray = LEVEL_11_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel11;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel11;
             break;
-        case LOOPS: 
-            titleText = "Level " + (LOOPS + 1)
-                    + " - Click: Valid Loop Statements";
-            levelArray = LOOPS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = loopsToAdv;
-            playerOutOfScore.innerHTML = loopsToAdv;
+        case LEVEL_12: 
+            titleText = "Level " + (LEVEL_12 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_12];
+            levelArray = LEVEL_12_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel12;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel12;
             break;
-        case ARRAYS: 
-            titleText = "Level " + (ARRAYS + 1)
-                    + " - Click: Valid Array Statements";
-            levelArray = ARRAY_STATEMENTS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = arraysToAdv;
-            playerOutOfScore.innerHTML = arraysToAdv;
+        case LEVEL_13: 
+            titleText = "Level " + (LEVEL_13 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_13];
+            levelArray = LEVEL_13_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel13;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel13;
             break;
-        case OOP: 
-            titleText = "Level " + (OOP + 1)
-                    + " - Click: Valid OOP Terms";
-            levelArray = OOP_STATEMENTS_ARRAY;
-            pointsNeededToAdvanceToNextLevel = oopToAdv;
-            playerOutOfScore.innerHTML = oopToAdv;
+        case LEVEL_14: 
+            titleText = "Level " + (LEVEL_14 + 1)
+                    + " - Click: Valid " + levelTitle[LEVEL_14];
+            levelArray = LEVEL_14_ARRAY;
+            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel14;
+            playerOutOfScore.innerHTML = ToAdvanceFromLevel14;
             break;
 
         default:

@@ -70,20 +70,20 @@ function introClickHandler() {
         console.log("Mode: Quick");
         mode = MODE_QUICK;
         initialNbrOfFlyingObjects = 5;
-        variablesToAdv = 5; 
-        constantsToAdv = 5;
-        varsAndConstantsToAdv = 5;
-        expressionsToAdv = 5; 
-        callingModulesToAdv = 5;
-        moduleHeadersToAdv = 5;
-        callingFunctionsToAdv = 5;
-        functionHeadersToAdv = 5;
-        modulesAndFunctionsToAdv = 5;
-        booleansToAdv = 5;
-        ifStatementsToAdv = 5;
-        loopsToAdv = 5;
-        arraysToAdv = 5;
-        oopToAdv = 5;
+        ToAdvanceFromLevel1 = 5; 
+        ToAdvanceFromLevel2 = 5;
+        ToAdvanceFromLevel3 = 5;
+        ToAdvanceFromLevel4 = 5; 
+        ToAdvanceFromLevel5 = 5;
+        ToAdvanceFromLevel6 = 5;
+        ToAdvanceFromLevel7 = 5;
+        ToAdvanceFromLevel8 = 5;
+        ToAdvanceFromLevel9 = 5;
+        ToAdvanceFromLevel10 = 5;
+        ToAdvanceFromLevel11 = 5;
+        ToAdvanceFromLevel12 = 5;
+        ToAdvanceFromLevel13 = 5;
+        ToAdvanceFromLevel14 = 5;
     }
     if (document.getElementById("mode2").checked) {
         console.log("Mode: Regular");
@@ -95,35 +95,35 @@ function introClickHandler() {
         mode = MODE_SUDDEN_DEATH;
         initialNbrOfFlyingObjects = getRandomNumber(4,8);
         if (firstGameLevel != lastGameLevel){
-            variablesToAdv = 5; 
-            constantsToAdv = 5;
-            varsAndConstantsToAdv = 5;
-            expressionsToAdv = 5; 
-            callingModulesToAdv = 5;
-            moduleHeadersToAdv = 5;
-            callingFunctionsToAdv = 5;
-            functionHeadersToAdv = 5;
-            modulesAndFunctionsToAdv = 5;
-            booleansToAdv = 5;
-            ifStatementsToAdv = 5;
-            loopsToAdv = 5;
-            arraysToAdv = 5;
-            oopToAdv = 5;
+            ToAdvanceFromLevel1 = 7; 
+            ToAdvanceFromLevel2 = 7;
+            ToAdvanceFromLevel3 = 7;
+            ToAdvanceFromLevel4 = 7; 
+            ToAdvanceFromLevel5 = 7;
+            ToAdvanceFromLevel6 = 7;
+            ToAdvanceFromLevel7 = 7;
+            ToAdvanceFromLevel8 = 7;
+            ToAdvanceFromLevel9 = 7;
+            ToAdvanceFromLevel10 = 7;
+            ToAdvanceFromLevel11 = 7;
+            ToAdvanceFromLevel12 = 7;
+            ToAdvanceFromLevel13 = 7;
+            ToAdvanceFromLevel14 = 7;
         } else {
-            variablesToAdv = 999; 
-            constantsToAdv = 999;
-            varsAndConstantsToAdv = 999;
-            expressionsToAdv = 999; 
-            callingModulesToAdv = 999;
-            moduleHeadersToAdv = 999;
-            callingFunctionsToAdv = 999;
-            functionHeadersToAdv = 999;
-            modulesAndFunctionsToAdv = 999;
-            booleansToAdv = 999;
-            ifStatementsToAdv = 999;
-            loopsToAdv = 999;
-            arraysToAdv = 999;
-            oopToAdv = 999;
+            ToAdvanceFromLevel1 = 999; 
+            ToAdvanceFromLevel2 = 999;
+            ToAdvanceFromLevel3 = 999;
+            ToAdvanceFromLevel4 = 999; 
+            ToAdvanceFromLevel5 = 999;
+            ToAdvanceFromLevel6 = 999;
+            ToAdvanceFromLevel7 = 999;
+            ToAdvanceFromLevel8 = 999;
+            ToAdvanceFromLevel9 = 999;
+            ToAdvanceFromLevel10 = 999;
+            ToAdvanceFromLevel11 = 999;
+            ToAdvanceFromLevel12 = 999;
+            ToAdvanceFromLevel13 = 999;
+            ToAdvanceFromLevel14 = 999;
         }
     }
 

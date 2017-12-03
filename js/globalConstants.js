@@ -26,20 +26,22 @@ var OVER = 2;
 var STOP = 3;
 
 //Game Levels
-var VARIABLES = 0;
-var CONSTANTS = 1;
-var VARS_AND_CONSTANTS = 2;
-var EXPRESSIONS = 3;
-var CALLING_MODULES = 4;
-var MODULE_HEADERS = 5;
-var CALLING_FUNCTIONS = 6;
-var FUNCTION_HEADERS = 7;
-var MODULES_AND_FUNCTIONS = 8;
-var BOOLEANS = 9;
-var IF_STATEMENTS = 10;
-var LOOPS = 11;
-var ARRAYS = 12;
-var OOP = 13;
+var LEVEL_1 = 0;
+var LEVEL_2 = 1;
+var LEVEL_3 = 2;
+var LEVEL_4 = 3;
+var LEVEL_5 = 4;
+var LEVEL_6 = 5;
+var LEVEL_7 = 6;
+var LEVEL_8 = 7;
+var LEVEL_9 = 8;
+var LEVEL_10 = 9;
+var LEVEL_11 = 10;
+var LEVEL_12 = 11;
+var LEVEL_13 = 12;
+var LEVEL_14 = 13;
+
+var EXTRA_TEXT_LEVEL_10 = " that evaluates to True";
 
 //Game Modes
 var MODE_QUICK = 0;
@@ -47,5 +49,5 @@ var MODE_REGULAR = 1;
 var MODE_SUDDEN_DEATH = 2;
 
 //Miscellaneous Constants
-var MAX_GAME_LEVEL = OOP;
+var MAX_GAME_LEVEL = LEVEL_14;
 var PAUSE_FACTOR = 4;
