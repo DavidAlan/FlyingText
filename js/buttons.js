@@ -1,4 +1,4 @@
-{
+/* 
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,271 +15,267 @@
 //
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
-} 
-//--- All things related to the flying text objects
-var flyingObject = {
-    x: 1100,
-    y: 20,
-    vx: 1,
-    visible: true,
-    sourceArrayElement: 999,
-    text: "NULL",
-    textTF: true,
-    errorExplanation: "",
-    alpha: 1,
-    font: "normal 16px Helvetica",
-    fillStyle: "white",
-    textBaseline: "top",
-    ySlot: 999    
-};
-var f = {
-    ySlots: [],
-    yActiveSlot: [],
-    yValue: 15,
-    openSlot: 0,
-    flyingObjectArray: [], 
-    flyingObjectColor: 1
-};
+*/
 
-for (var z = 0; z < gC.MAX_FLYING_OBJECTS; z++){
-    f.ySlots[z] = f.yValue;
-    f.yActiveSlot[z] = false;
-    f.yValue = f.yValue + 35; 
+*
+{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;   /* emulogic;  */
+    padding: 0px;
+    margin: 0px;
 }
 
-var flyingObjectArea = document.getElementById("flyingObjectArea");
-flyingObjectArea.style.cursor = "pointer";
-flyingObjectArea.addEventListener("click", clickHandlerFlyingObjects, false);
+h1
+{
+    text-align: center;
+    font-size: 32px;
+    color: #FFBF00;
+    padding-bottom: 10px;
 
-//////////////////////////////////////////////////////////////////////////////
+    text-shadow: 3px 3px black;
 
-function clickHandlerFlyingObjects() {
-    if (gV.pause) {return;}
-     //Find the mouse's x and y position
-    var mouseX = event.layerX - canvas.offsetLeft;
-    var mouseY = event.layerY - canvas.offsetTop;
-        
-    //console.log("\n------------------------mouse: " + mouseX + "," + mouseY);  //???????????????
-    checkForHit(mouseX, mouseY);  
+    -webkit-text-stroke: 1px #000;
+    -moz-text-stroke: 1px #000;
+    text-stroke: 1px #000;
 }
-function createFlyingObjects(){  
-    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
-        f.flyingObjectArray[i] = Object.create(flyingObject); 
-        f.flyingObjectArray[i].sourceArrayElement = 999;     
-        f.flyingObjectArray[i].font = "normal 16px Helvetica";
-        f.flyingObjectArray[i].alpha = 1;
-        f.flyingObjectArray[i].textBaseline = "top"; 
-    }
-    initializeFlyingObjects();
+
+p
+{
+    text-align: left;
+    font-size: 18px;
+    padding-bottom: 10px;
+    color: #FFBF00;  /* orange */
 }
-function initializeFlyingObjects(){ 
-    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
-        createOneFlyingObject(i);
-                                                        
-        if (i < gV.initialNbrOfFlyingObjects) {
-            f.flyingObjectArray[i].visible = true;
-            f.openSlot = getOpenSlot();
-            f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
-            f.flyingObjectArray[i].ySlot = f.openSlot;
-        } else {
-            f.flyingObjectArray[i].visible = false; 
-        }
-    }
+
+button
+{
+    font-size: 24px;
+    color: #FFBF00;
+    padding: 5px 10px;
+    border: 2px solid lime;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;	
+    background: black;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;   
 }
-function createOneFlyingObject (i) {
-    f.flyingObjectArray[i].x = getRandomNumber(1050, 1100); 
-    f.flyingObjectArray[i].vx = getRandomNumber(1, 9) /5 * -1;
-    f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_1;
-    getTextForSlot(gV.levelArray, i); 
-    f.flyingObjectArray[i].visible = true;
+
+button:hover
+{
+    background-color: #FFBF00;
+    color: #000;
 }
-function getOpenSlot(){
-    var randomSlot = getRandomNumber(0, gC.MAX_FLYING_OBJECTS - 1);
-    while (f.yActiveSlot[randomSlot]) {
-        randomSlot = getRandomNumber(0, gC.MAX_FLYING_OBJECTS - 1);
-    }
-    f.yActiveSlot[randomSlot] = true; 
-    return randomSlot;
+
+button:active
+{
+    background-color: #9e7606;    
+    color: #000;
 }
-function getTextForSlot(fTextArray, j){
-    var randomElement = getRandomNumber(0, fTextArray.length - 1);
-    var usedElement   = checkForUsedElement(randomElement);
-    while (usedElement) {
-        randomElement = getRandomNumber(0, fTextArray.length - 1);
-        usedElement   = checkForUsedElement(randomElement);
-    }
-    f.flyingObjectArray[j].sourceArrayElement = randomElement;  
+
+#game 
+{
+    margin: 10px auto;  
+    width: 1200px;  
+    height: 750px; /*  auto;  */
+    padding: 15px;
+    border: black;  
+
+    background:-webkit-linear-gradient(300deg, #588063, #000);
+    background:-moz-linear-gradient(top, #588063, #000);
+    background: linear-gradient(top, #588063, #000);
+
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;	
+}
+
+#stage
+{
+    margin: 0px 0px; /* auto;  */
+    width: 1200px;
+    height: 600px;
+    position: relative;
+
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    margin-bottom: 20px;
+    border: 1px solid lime;
+}
+
+#text
+{
+    text-align: left;
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #FFBF00;  /* orange */   
+}
+
+.modeAndLevels
+{
+    position: relative;
+    height: 18px;
+    top:   35px;
+    left:   30px;   /*1410 */
+    width: 170px;
+    font-size: 16px;
+    color: #FFBF00;  /* orange */   
+}
+
+.flyingObjectArea {
+    position: absolute;
+    height: 600px;
+    top:    1px;
+    left:   1px;
+    width:  1200px;
+    font-size: 16px;
+    color: yellow;   
+}
+
+.messages {
+    position: absolute;
+    height: 69px;
+    top:   700px;
+    left:   280px;
+    width: 701px;
+    font-size: 24px;
+    color: rgb(12, 13, 12);
+}
+
+#overlayText{
+    position: absolute; 
+    top: 40%; /*  45%;  */
+    left: 55%;
+    font-size: 20px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
     
-    var parts = fTextArray[randomElement].split('#', 3);  //?????????????????????undefined?
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 3px solid black;
     
-    f.flyingObjectArray[j].text = parts[0]; 
-    f.flyingObjectArray[j].textTF = parts[1]; 
-    f.flyingObjectArray[j].errorExplanation = parts[2]; 
 }
-function checkForUsedElement(rElement){
-    for (var k = 0; k < gC.MAX_FLYING_OBJECTS; k++) {
-        if (f.flyingObjectArray[k].visible) {                     
-            if (f.flyingObjectArray[k].sourceArrayElement === rElement) {  
-                return true;
-            } else {
-            }//end if
-        }//end if
-    }//end for
-    return false;
-}
-function updateFlyingObjects() {
-    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
-        if (f.flyingObjectArray[i].visible) {
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_1) {f.flyingObjectColor = 1;}
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_2) {f.flyingObjectColor = 2;}
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_3) {f.flyingObjectColor = 3;}
-
-            f.flyingObjectArray[i].x = f.flyingObjectArray[i].x + f.flyingObjectArray[i].vx;
-
-            if (f.flyingObjectArray[i].x < 2) {
-                if(f.flyingObjectArray[i].textTF === "true") {  //good syntax got past
-                    gV.playerMinusPoints--;
-                    updateScores();
-                    
-                    showPopUpWindow(f.flyingObjectArray[i].x, 
-                                    f.flyingObjectArray[i].y,     
-                                    "Missed good syntax..... " +
-                                    f.flyingObjectArray[i].text);
-                    f.flyingObjectArray[i].visible = false;
-                    pauseGame();  
-                    hidePauseButton();
-                    
-                    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
-                        gV.errorText = f.flyingObjectArray[i].text;
-                        gV.errorMessage = "You missed clicking on that...";
-                        console.log("Sudden Death encountered!");
-                        gV.gameState = gC.OVER;
-                        return;
-                    }
-                } else {  //bad syntax got past them
-                    //gV.playerMinusPoints++;
-                }
-                f.yActiveSlot[f.flyingObjectArray[i].ySlot] = false; 
-                createOneFlyingObject(i);
-                f.openSlot = getOpenSlot();
-                f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
-                f.flyingObjectArray[i].ySlot = f.openSlot;
-                activateSlot();
-            }
-                                                        
-            //Change colors of the text
-            if (f.flyingObjectArray[i].x < 500) {
-                f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_2;
-            }
-            if (f.flyingObjectArray[i].x < 100) {
-                f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_3;
-            }
-        }
-    }
-}
-function displayFlyingObjects() {
-    for(var i = 0; i < gC.MAX_FLYING_OBJECTS; i++){
-        if(f.flyingObjectArray[i].visible){
-                                                    //console.log("displayFlyingObjects i=" + i
-                                                    //    + "  y=" + f.flyingObjectArray[i].y
-                                                    //);
-            drawingSurface.globalAlpha = f.flyingObjectArray[i].alpha;
-            drawingSurface.font = f.flyingObjectArray[i].font;  
-
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_1) {f.flyingObjectColor = 1;}
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_2) {f.flyingObjectColor = 2;}
-            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_3) {f.flyingObjectColor = 3;}
-                
-            switch(f.flyingObjectColor) {
-                case 1: default:
-                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_1;
-                    break;
-                case 2: 
-                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_2;
-                    break;
-                case 3: 
-                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_3;
-                    break;
-            }
-            drawingSurface.textBaseline = f.flyingObjectArray[i].textBaseline;
-            drawingSurface.fillText(f.flyingObjectArray[i].text, 
-                                    f.flyingObjectArray[i].x, 
-                                    f.flyingObjectArray[i].y);  
-        }
-        drawingSurface.globalAlpha = 1;
-    }
-}
-function checkForHit(xPos,yPos){
-    var yTop, yBot, xLeft, xRight;
-    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
-        if (f.flyingObjectArray[i].visible) {
-            yTop   = f.flyingObjectArray[i].y - 6;  
-            yBot   = f.flyingObjectArray[i].y + 25;
-            
-            xLeft   = f.flyingObjectArray[i].x - 5;
-            xRight  = f.flyingObjectArray[i].x  
-                    + (f.flyingObjectArray[i].text.length * 15);
-            
-            if (yPos >= yTop
-             && yPos <= yBot
-             && xPos >= xLeft
-             && xPos <= xRight) {
-                if(f.flyingObjectArray[i].textTF === "true") {  //clicked on good syntax
-                    gV.playerPlusPoints++;
-                    f.flyingObjectArray[i].visible = false; 
-                    f.yActiveSlot[f.flyingObjectArray[i].ySlot] = false;                                                    
-                    createOneFlyingObject(i);
-                    f.openSlot = getOpenSlot();
-                    f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
-                    f.flyingObjectArray[i].ySlot = f.openSlot;
-                    if (getRandomNumber(0,1) === 1) {
-                        activateSlot();
-                    }
-                    turnOnOverlayResult(xPos, yPos);
-                    break;
-                } else {  //clicked on bad syntax
-                    gV.playerMinusPoints--;
-                    updateScores();
-                    showPopUpWindow(f.flyingObjectArray[i].x, 
-                                    f.flyingObjectArray[i].y,     
-                                    f.flyingObjectArray[i].errorExplanation);
-                    pauseGame();  
-                    hidePauseButton();
-                    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
-                        gV.errorText = f.flyingObjectArray[i].text;
-                        gV.errorMessage = f.flyingObjectArray[i].errorExplanation;
-                        console.log("Sudden Death encountered!");
-                        gV.gameState = gC.OVER;  
-                        return;
-                    }
-                }
-            }
-        }
-    }
-}
-function activateSlot(){
-    for (var j = 0; j < gC.MAX_FLYING_OBJECTS; j++) {
-        if (!f.flyingObjectArray[j].visible) {
-            createOneFlyingObject(j);
-            f.openSlot = getOpenSlot();
-            f.flyingObjectArray[j].y = f.ySlots[f.openSlot]; 
-            f.flyingObjectArray[j].ySlot = f.openSlot;
-            break;
-        }
-    }
-}
-function toString(fObject) {
-    var str = "--------------------------------\n" +
-    "x:       " + fObject.x + "\n" +
-    "y:       " + fObject.y + "\n" +
-    "vx:      " + fObject.vx + "\n" +
-    "text:    " + fObject.text + "\n" +
-    "textTF:  " + fObject.textTF + "\n" +
-    "ySlot:   " + fObject.ySlot + "\n" +   
-    "visible: " + fObject.visible + "\n" +
-    "sourceArrayElement: " + fObject.sourceArrayElement + "\n" +
-
-    "--------------------------------";
+#overlayTextResult{
+    position: absolute;  
+    color: white;
+       
+    background:-webkit-linear-gradient(300deg, #588063, #000);
+    background:-moz-linear-gradient(top, #588063, #000);
+    background: linear-gradient(top, #588063, #000);
     
-    return str;
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
+
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 3px solid black;
+}
+/************************************************************************/
+
+#completed_game 
+{
+    margin: 10px auto;  
+    width: 1200px;  
+    height: 750px; /*  auto;  */
+    padding: 15px;
+    border: black;  
+
+    background:-webkit-linear-gradient(300deg, #588063, #000);
+    background:-moz-linear-gradient(top, #588063, #000);
+    background: linear-gradient(top, #588063, #000);
+
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;	
+}
+
+#completed_stage
+{
+    margin: 0px 0px; /* auto;  */
+    width: 1200px;
+    height: 600px;
+    position: relative;
+
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    margin-bottom: 20px;
+    border: 1px solid lime;
+}
+
+
+/************************************************************************/
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: block;
+    /*display: inline-block; */
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    margin-bottom: 300px;
+    font-size: 16px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
 }
