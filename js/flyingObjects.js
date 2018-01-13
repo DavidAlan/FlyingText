@@ -17,8 +17,7 @@
 //  <https://www.gnu.org/licenses/>.
 } 
 //--- All things related to the flying text objects
-var flyingObject =
-{
+var flyingObject = {
     x: 1100,
     y: 20,
     vx: 1,
@@ -33,25 +32,20 @@ var flyingObject =
     textBaseline: "top",
     ySlot: 999    
 };
-var MAX_FLYING_OBJECTS = 17;
+var f = {
+    ySlots: [],
+    yActiveSlot: [],
+    yValue: 15,
+    openSlot: 0,
+    flyingObjectArray: [], 
+    flyingObjectColor: 1
+};
 
-var Y_SLOTS = [];
-var yActiveSlot = [];
-var yValue  = 15;
-
-for (var z = 0; z < MAX_FLYING_OBJECTS; z++){
-    Y_SLOTS[z] = yValue;
-    yActiveSlot[z] = false;
-    yValue = yValue + 35; 
+for (var z = 0; z < gC.MAX_FLYING_OBJECTS; z++){
+    f.ySlots[z] = f.yValue;
+    f.yActiveSlot[z] = false;
+    f.yValue = f.yValue + 35; 
 }
-var openSlot;
-
-var flyingObjectArray = [];
-
-var flyingObjectColor = 1;
-var FLYING_OBJECT_COLOR_1 = "white";
-var FLYING_OBJECT_COLOR_2 = "yellow"; 
-var FLYING_OBJECT_COLOR_3 = "hotPink";
 
 var flyingObjectArea = document.getElementById("flyingObjectArea");
 flyingObjectArea.style.cursor = "pointer";
@@ -60,7 +54,7 @@ flyingObjectArea.addEventListener("click", clickHandlerFlyingObjects, false);
 //////////////////////////////////////////////////////////////////////////////
 
 function clickHandlerFlyingObjects() {
-    if (pause) {return;}
+    if (gV.pause) {return;}
      //Find the mouse's x and y position
     var mouseX = event.layerX - canvas.offsetLeft;
     var mouseY = event.layerY - canvas.offsetTop;
@@ -69,66 +63,63 @@ function clickHandlerFlyingObjects() {
     checkForHit(mouseX, mouseY);  
 }
 function createFlyingObjects(){  
-    for (var i = 0; i < MAX_FLYING_OBJECTS; i++) {
-        flyingObjectArray[i] = Object.create(flyingObject); 
-        flyingObjectArray[i].sourceArrayElement = 999;     
-        flyingObjectArray[i].font = "normal 16px Helvetica";
-        flyingObjectArray[i].alpha = 1;
-        flyingObjectArray[i].textBaseline = "top"; 
+    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
+        f.flyingObjectArray[i] = Object.create(flyingObject); 
+        f.flyingObjectArray[i].sourceArrayElement = 999;     
+        f.flyingObjectArray[i].font = "normal 16px Helvetica";
+        f.flyingObjectArray[i].alpha = 1;
+        f.flyingObjectArray[i].textBaseline = "top"; 
     }
     initializeFlyingObjects();
 }
 function initializeFlyingObjects(){ 
-    for (var i = 0; i < MAX_FLYING_OBJECTS; i++) {
+    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
         createOneFlyingObject(i);
                                                         
-        if (i < initialNbrOfFlyingObjects) {
-            flyingObjectArray[i].visible = true;
-            openSlot = getOpenSlot();
-            flyingObjectArray[i].y = Y_SLOTS[openSlot]; 
-            flyingObjectArray[i].ySlot = openSlot;
+        if (i < gV.initialNbrOfFlyingObjects) {
+            f.flyingObjectArray[i].visible = true;
+            f.openSlot = getOpenSlot();
+            f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
+            f.flyingObjectArray[i].ySlot = f.openSlot;
         } else {
-            flyingObjectArray[i].visible = false;
+            f.flyingObjectArray[i].visible = false; 
         }
-        //if (flyingObjectArray[i].visible) {                     // DEBUG CODE 
-        //    console.log(toString(flyingObjectArray[i]));
-        //}
     }
 }
 function createOneFlyingObject (i) {
-    flyingObjectArray[i].x = getRandomNumber(1050, 1100); 
-    flyingObjectArray[i].vx = getRandomNumber(1, 9) /5 * -1;
-    flyingObjectArray[i].fillStyle = FLYING_OBJECT_COLOR_1;
-    getTextForSlot(levelArray, i); 
-    flyingObjectArray[i].visible = true;
+    f.flyingObjectArray[i].x = getRandomNumber(1050, 1100); 
+    f.flyingObjectArray[i].vx = getRandomNumber(1, 9) /5 * -1;
+    f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_1;
+    getTextForSlot(gV.levelArray, i); 
+    f.flyingObjectArray[i].visible = true;
 }
 function getOpenSlot(){
-    var randomSlot = getRandomNumber(0,MAX_FLYING_OBJECTS - 1);
-    while (yActiveSlot[randomSlot]) {
-        randomSlot = getRandomNumber(0,MAX_FLYING_OBJECTS - 1);
+    var randomSlot = getRandomNumber(0, gC.MAX_FLYING_OBJECTS - 1);
+    while (f.yActiveSlot[randomSlot]) {
+        randomSlot = getRandomNumber(0, gC.MAX_FLYING_OBJECTS - 1);
     }
-    yActiveSlot[randomSlot] = true;
+    f.yActiveSlot[randomSlot] = true; 
     return randomSlot;
 }
 function getTextForSlot(fTextArray, j){
-    var randomElement = getRandomNumber(0,fTextArray.length - 1);
+    var randomElement = getRandomNumber(0, fTextArray.length - 1);
     var usedElement   = checkForUsedElement(randomElement);
     while (usedElement) {
-        randomElement = getRandomNumber(0,fTextArray.length - 1);
+        randomElement = getRandomNumber(0, fTextArray.length - 1);
         usedElement   = checkForUsedElement(randomElement);
     }
-    flyingObjectArray[j].sourceArrayElement = randomElement;  
+    f.flyingObjectArray[j].sourceArrayElement = randomElement;  
     
-    var parts = fTextArray[randomElement].split('#', 3);
+    var parts = fTextArray[randomElement].split('#', 3);  //?????????????????????undefined?
     
-    flyingObjectArray[j].text = parts[0]; 
-    flyingObjectArray[j].textTF = parts[1]; 
-    flyingObjectArray[j].errorExplanation = parts[2]; 
+    f.flyingObjectArray[j].text = parts[0]; 
+    f.flyingObjectArray[j].textTF = parts[1]; 
+    f.flyingObjectArray[j].errorExplanation = parts[2]; 
 }
 function checkForUsedElement(rElement){
-    for (var k = 0; k < MAX_FLYING_OBJECTS; k++) {
-        if (flyingObjectArray[k].visible) {                     
-            if (flyingObjectArray[k].sourceArrayElement === rElement) {  
+    for (var k = 0; k < gC.MAX_FLYING_OBJECTS; k++) {
+        if (f.flyingObjectArray[k].visible) {                     
+            if (f.flyingObjectArray[k].sourceArrayElement === rElement) {  
                 return true;
             } else {
             }//end if
@@ -137,124 +128,128 @@ function checkForUsedElement(rElement){
     return false;
 }
 function updateFlyingObjects() {
-    for (var i = 0; i < MAX_FLYING_OBJECTS; i++) {
-        if (flyingObjectArray[i].visible) {
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_1) {flyingObjectColor = 1;}
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_2) {flyingObjectColor = 2;}
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_3) {flyingObjectColor = 3;}
+    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
+        if (f.flyingObjectArray[i].visible) {
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_1) {f.flyingObjectColor = 1;}
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_2) {f.flyingObjectColor = 2;}
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_3) {f.flyingObjectColor = 3;}
 
-            flyingObjectArray[i].x = flyingObjectArray[i].x + flyingObjectArray[i].vx;
+            f.flyingObjectArray[i].x = f.flyingObjectArray[i].x + f.flyingObjectArray[i].vx;
 
-            if (flyingObjectArray[i].x < 2) {
-                if(flyingObjectArray[i].textTF === "true") {  //good syntax got past
-                    playerMinusPoints--;
+            if (f.flyingObjectArray[i].x < 2) {
+                if(f.flyingObjectArray[i].textTF === "true") {  //good syntax got past
+                    gV.playerMinusPoints--;
                     updateScores();
                     
-                    showPopUpWindow(flyingObjectArray[i].x, 
-                                    flyingObjectArray[i].y,     
+                    showPopUpWindow(f.flyingObjectArray[i].x, 
+                                    f.flyingObjectArray[i].y,     
                                     "Missed good syntax..... " +
-                                    flyingObjectArray[i].text);
-                    flyingObjectArray[i].visible = false;
+                                    f.flyingObjectArray[i].text);
+                    f.flyingObjectArray[i].visible = false;
                     pauseGame();  
                     hidePauseButton();
                     
-                    if (mode == MODE_SUDDEN_DEATH) {
+                    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+                        gV.errorText = f.flyingObjectArray[i].text;
+                        gV.errorMessage = "You missed clicking on that...";
                         console.log("Sudden Death encountered!");
-                        gameState = OVER;
+                        gV.gameState = gC.OVER;
                         return;
                     }
                 } else {  //bad syntax got past them
-                    //playerMinusPoints++;
+                    //gV.playerMinusPoints++;
                 }
-                yActiveSlot[flyingObjectArray[i].ySlot] = false; 
+                f.yActiveSlot[f.flyingObjectArray[i].ySlot] = false; 
                 createOneFlyingObject(i);
-                openSlot = getOpenSlot();
-                flyingObjectArray[i].y = Y_SLOTS[openSlot]; 
-                flyingObjectArray[i].ySlot = openSlot;
+                f.openSlot = getOpenSlot();
+                f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
+                f.flyingObjectArray[i].ySlot = f.openSlot;
                 activateSlot();
             }
                                                         
             //Change colors of the text
-            if (flyingObjectArray[i].x < 500) {
-                flyingObjectArray[i].fillStyle = FLYING_OBJECT_COLOR_2;
+            if (f.flyingObjectArray[i].x < 500) {
+                f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_2;
             }
-            if (flyingObjectArray[i].x < 100) {
-                flyingObjectArray[i].fillStyle = FLYING_OBJECT_COLOR_3;
+            if (f.flyingObjectArray[i].x < 100) {
+                f.flyingObjectArray[i].fillStyle = gC.FLYING_OBJECT_COLOR_3;
             }
         }
     }
 }
 function displayFlyingObjects() {
-    for(var i = 0; i < MAX_FLYING_OBJECTS; i++){
-        if(flyingObjectArray[i].visible){
+    for(var i = 0; i < gC.MAX_FLYING_OBJECTS; i++){
+        if(f.flyingObjectArray[i].visible){
                                                     //console.log("displayFlyingObjects i=" + i
-                                                    //    + "  y=" + flyingObjectArray[i].y
+                                                    //    + "  y=" + f.flyingObjectArray[i].y
                                                     //);
-            drawingSurface.globalAlpha = flyingObjectArray[i].alpha;
-            drawingSurface.font = flyingObjectArray[i].font;  
+            drawingSurface.globalAlpha = f.flyingObjectArray[i].alpha;
+            drawingSurface.font = f.flyingObjectArray[i].font;  
 
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_1) {flyingObjectColor = 1;}
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_2) {flyingObjectColor = 2;}
-            if (flyingObjectArray[i].fillStyle === FLYING_OBJECT_COLOR_3) {flyingObjectColor = 3;}
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_1) {f.flyingObjectColor = 1;}
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_2) {f.flyingObjectColor = 2;}
+            if (f.flyingObjectArray[i].fillStyle === gC.FLYING_OBJECT_COLOR_3) {f.flyingObjectColor = 3;}
                 
-            switch(flyingObjectColor) {
+            switch(f.flyingObjectColor) {
                 case 1: default:
-                    drawingSurface.fillStyle = FLYING_OBJECT_COLOR_1;
+                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_1;
                     break;
                 case 2: 
-                    drawingSurface.fillStyle = FLYING_OBJECT_COLOR_2;
+                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_2;
                     break;
                 case 3: 
-                    drawingSurface.fillStyle = FLYING_OBJECT_COLOR_3;
+                    drawingSurface.fillStyle = gC.FLYING_OBJECT_COLOR_3;
                     break;
             }
-            drawingSurface.textBaseline = flyingObjectArray[i].textBaseline;
-            drawingSurface.fillText(flyingObjectArray[i].text, 
-                                    flyingObjectArray[i].x, 
-                                    flyingObjectArray[i].y);  
+            drawingSurface.textBaseline = f.flyingObjectArray[i].textBaseline;
+            drawingSurface.fillText(f.flyingObjectArray[i].text, 
+                                    f.flyingObjectArray[i].x, 
+                                    f.flyingObjectArray[i].y);  
         }
         drawingSurface.globalAlpha = 1;
     }
 }
 function checkForHit(xPos,yPos){
     var yTop, yBot, xLeft, xRight;
-    for (var i = 0; i < MAX_FLYING_OBJECTS; i++) {
-        if (flyingObjectArray[i].visible) {
-            yTop   = flyingObjectArray[i].y - 6;  
-            yBot   = flyingObjectArray[i].y + 25;
+    for (var i = 0; i < gC.MAX_FLYING_OBJECTS; i++) {
+        if (f.flyingObjectArray[i].visible) {
+            yTop   = f.flyingObjectArray[i].y - 6;  
+            yBot   = f.flyingObjectArray[i].y + 25;
             
-            xLeft   = flyingObjectArray[i].x - 5;
-            xRight  = flyingObjectArray[i].x  
-                    + (flyingObjectArray[i].text.length * 15);
+            xLeft   = f.flyingObjectArray[i].x - 5;
+            xRight  = f.flyingObjectArray[i].x  
+                    + (f.flyingObjectArray[i].text.length * 15);
             
             if (yPos >= yTop
              && yPos <= yBot
              && xPos >= xLeft
              && xPos <= xRight) {
-                if(flyingObjectArray[i].textTF === "true") {  //clicked on good syntax
-                    playerPlusPoints++;
-                    flyingObjectArray[i].visible = false; 
-                    yActiveSlot[flyingObjectArray[i].ySlot] = false;                                                    
+                if(f.flyingObjectArray[i].textTF === "true") {  //clicked on good syntax
+                    gV.playerPlusPoints++;
+                    f.flyingObjectArray[i].visible = false; 
+                    f.yActiveSlot[f.flyingObjectArray[i].ySlot] = false;                                                    
                     createOneFlyingObject(i);
-                    openSlot = getOpenSlot();
-                    flyingObjectArray[i].y = Y_SLOTS[openSlot]; 
-                    flyingObjectArray[i].ySlot = openSlot;
+                    f.openSlot = getOpenSlot();
+                    f.flyingObjectArray[i].y = f.ySlots[f.openSlot]; 
+                    f.flyingObjectArray[i].ySlot = f.openSlot;
                     if (getRandomNumber(0,1) === 1) {
                         activateSlot();
                     }
                     turnOnOverlayResult(xPos, yPos);
                     break;
                 } else {  //clicked on bad syntax
-                    playerMinusPoints--;
+                    gV.playerMinusPoints--;
                     updateScores();
-                    showPopUpWindow(flyingObjectArray[i].x, 
-                                    flyingObjectArray[i].y,     
-                                    flyingObjectArray[i].errorExplanation);
+                    showPopUpWindow(f.flyingObjectArray[i].x, 
+                                    f.flyingObjectArray[i].y,     
+                                    f.flyingObjectArray[i].errorExplanation);
                     pauseGame();  
                     hidePauseButton();
-                    if (mode == MODE_SUDDEN_DEATH) {
+                    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+                        gV.errorText = f.flyingObjectArray[i].text;
+                        gV.errorMessage = f.flyingObjectArray[i].errorExplanation;
                         console.log("Sudden Death encountered!");
-                        gameState = OVER;  
+                        gV.gameState = gC.OVER;  
                         return;
                     }
                 }
@@ -263,33 +258,15 @@ function checkForHit(xPos,yPos){
     }
 }
 function activateSlot(){
-    for (var j = 0; j < MAX_FLYING_OBJECTS; j++) {
-        if (!flyingObjectArray[j].visible) {
+    for (var j = 0; j < gC.MAX_FLYING_OBJECTS; j++) {
+        if (!f.flyingObjectArray[j].visible) {
             createOneFlyingObject(j);
-            openSlot = getOpenSlot();
-            flyingObjectArray[j].y = Y_SLOTS[openSlot]; 
-            flyingObjectArray[j].ySlot = openSlot;
+            f.openSlot = getOpenSlot();
+            f.flyingObjectArray[j].y = f.ySlots[f.openSlot]; 
+            f.flyingObjectArray[j].ySlot = f.openSlot;
             break;
         }
     }
-}
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
 }
 function toString(fObject) {
     var str = "--------------------------------\n" +

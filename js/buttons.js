@@ -1,4 +1,4 @@
-/* 
+{
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,267 +15,156 @@
 //
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
-*/
-
-*
-{
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;   /* emulogic;  */
-    padding: 0px;
-    margin: 0px;
 }
-
-h1
-{
-    text-align: center;
-    font-size: 32px;
-    color: #FFBF00;
-    padding-bottom: 10px;
-
-    text-shadow: 3px 3px black;
-
-    -webkit-text-stroke: 1px #000;
-    -moz-text-stroke: 1px #000;
-    text-stroke: 1px #000;
+function clickHandler() {
+    gV.pause = !gV.pause;
+    if (gV.pause) {
+        gV.numberOfPauses++;
+        pauseGame();
+    } else {
+        resumeGame();
+    }
 }
-
-p
-{
-    text-align: left;
-    font-size: 18px;
-    padding-bottom: 10px;
-    color: #FFBF00;  /* orange */
+function pauseGame() {
+    document.getElementById("pauseButton").style.padding = "5px 25px 5px 25px";  // t,r,b,ld
+    pauseButton.innerHTML = " Resume "; 
+    gV.gameState = gC.PAUSED;
+    gV.pause = true;
+    //console.log("---------- Paused");
 }
-
-button
-{
-    font-size: 24px;
-    color: #FFBF00;
-    padding: 5px 10px;
-    border: 2px solid lime;
-
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;	
-    background: black;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;   
+function resumeGame() {
+    document.getElementById("pauseButton").style.display = "inline-block";
+    document.getElementById("pauseButton").style.padding = "5px 37px 5px 36px";  // t,r,b,l
+    pauseButton.innerHTML = "Pause"; 
+    gV.gameState = gC.PLAYING;
+    gV.pause = false;
+    turnOffOverlay();
+    turnOffOverlayResult();
+    gV.endOfLevel = false;
+    //console.log("---------- Resuming");
 }
-
-button:hover
-{
-    background-color: #FFBF00;
-    color: #000;
+function hidePauseButton(){
+    document.getElementById("pauseButton").style.display = "none";
 }
-
-button:active
-{
-    background-color: #9e7606;    
-    color: #000;
+function mousedownHandler(event) { 
+    //Find the mouse's x and y position
+    var mouseX = event.layerX - canvas.offsetLeft;
+    var mouseY = event.layerY - canvas.offsetTop;
 }
-
-#game 
-{
-    margin: 10px auto;  
-    width: 1200px;  
-    height: 750px; /*  auto;  */
-    padding: 15px;
-    border: black;  
-
-    background:-webkit-linear-gradient(300deg, #588063, #000);
-    background:-moz-linear-gradient(top, #588063, #000);
-    background: linear-gradient(top, #588063, #000);
-
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;	
-}
-
-#stage
-{
-    margin: 0px 0px; /* auto;  */
-    width: 1200px;
-    height: 600px;
-    position: relative;
-
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-
-    margin-bottom: 20px;
-    border: 1px solid lime;
-}
-
-#text
-{
-    text-align: left;
-    font-size: 14px;
-    padding-bottom: 10px;
-    color: #FFBF00;  /* orange */   
-}
-
-.modeAndLevels
-{
-    position: relative;
-    height: 18px;
-    top:   35px;
-    left:   30px;   /*1410 */
-    width: 170px;
-    font-size: 16px;
-    color: #FFBF00;  /* orange */   
-}
-
-.flyingObjectArea {
-    position: absolute;
-    height: 600px;
-    top:    1px;
-    left:   1px;
-    width:  1200px;
-    font-size: 16px;
-    color: yellow;   
-}
-
-.messages {
-    position: absolute;
-    height: 69px;
-    top:   700px;
-    left:   280px;
-    width: 701px;
-    font-size: 24px;
-    color: rgb(12, 13, 12);
-}
-
-#overlayText{
-    position: absolute; 
-    top: 40%; /*  45%;  */
-    left: 55%;
-    font-size: 20px;
-    color: white;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+function introClickHandler() {
+    gV.firstGameLevel = document.getElementById("beginLevel").options.selectedIndex;
+    gV.lastGameLevel  = document.getElementById("endLevel").options.selectedIndex;
     
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 3px solid black;
+    //Validate begin and end level values
+    if (gV.firstGameLevel > gV.lastGameLevel) {
+        gV.gameLevel = 0;
+        gV.firstGameLevel = 0;
+        gV.lastGameLevel = gC.MAX_GAME_LEVEL;
+    }
+    gV.gameLevel  = gV.firstGameLevel;
     
-}
-#overlayTextResult{
-    position: absolute;  
-    color: white;
-       
-    background:-webkit-linear-gradient(300deg, #588063, #000);
-    background:-moz-linear-gradient(top, #588063, #000);
-    background: linear-gradient(top, #588063, #000);
+    document.getElementById("endLevel").selectedIndex = "13";
+
+    if (document.getElementById("mode1").checked) {
+        console.log("Mode: Quick");
+        gV.mode = gC.MODE_QUICK;
+        gV.initialNbrOfFlyingObjects = 5;
+        gV.ToAdvanceFromLevel1 = 5; 
+        gV.ToAdvanceFromLevel2 = 5;
+        gV.ToAdvanceFromLevel3 = 5;
+        gV.ToAdvanceFromLevel4 = 5; 
+        gV.ToAdvanceFromLevel5 = 5;
+        gV.ToAdvanceFromLevel6 = 5;
+        gV.ToAdvanceFromLevel7 = 5;
+        gV.ToAdvanceFromLevel8 = 5;
+        gV.ToAdvanceFromLevel9 = 5;
+        gV.ToAdvanceFromLevel10 = 5;
+        gV.ToAdvanceFromLevel11 = 5;
+        gV.ToAdvanceFromLevel12 = 5;
+        gV.ToAdvanceFromLevel13 = 5;
+        gV.ToAdvanceFromLevel14 = 5;
+    }
+    if (document.getElementById("mode2").checked) {
+        console.log("Mode: Regular");
+        gV.mode = gC.MODE_REGULAR;
+        gV.initialNbrOfFlyingObjects = getRandomNumber(4,8);
+    }
+    if (document.getElementById("mode3").checked) {
+        console.log("Mode: Sudden Death");
+        gV.mode = gC.MODE_SUDDEN_DEATH;
+        gV.initialNbrOfFlyingObjects = getRandomNumber(4,8);
+        if (gV.firstGameLevel != gV.lastGameLevel){
+            gV.ToAdvanceFromLevel1 = 7;
+            gV.ToAdvanceFromLevel2 = 7;
+            gV.ToAdvanceFromLevel3 = 7;
+            gV.ToAdvanceFromLevel4 = 7;
+            gV.ToAdvanceFromLevel5 = 7;
+            gV.ToAdvanceFromLevel6 = 7;
+            gV.ToAdvanceFromLevel7 = 7;
+            gV.ToAdvanceFromLevel8 = 7;
+            gV.ToAdvanceFromLevel9 = 7;
+            gV.ToAdvanceFromLevel10 = 7;
+            gV.ToAdvanceFromLevel11 = 7;
+            gV.ToAdvanceFromLevel12 = 7;
+            gV.ToAdvanceFromLevel13 = 7;
+            gV.ToAdvanceFromLevel14 = 7;
+        } else {
+            gV.ToAdvanceFromLevel1 = 999; 
+            gV.ToAdvanceFromLevel2 = 999;
+            gV.ToAdvanceFromLevel3 = 999;
+            gV.ToAdvanceFromLevel4 = 999; 
+            gV.ToAdvanceFromLevel5 = 999;
+            gV.ToAdvanceFromLevel6 = 999;
+            gV.ToAdvanceFromLevel7 = 999;
+            gV.ToAdvanceFromLevel8 = 999;
+            gV.ToAdvanceFromLevel9 = 999;
+            gV.ToAdvanceFromLevel10 = 999;
+            gV.ToAdvanceFromLevel11 = 999;
+            gV.ToAdvanceFromLevel12 = 999;
+            gV.ToAdvanceFromLevel13 = 999;
+            gV.ToAdvanceFromLevel14 = 999;
+        }
+    }
+
+    completed_game.style.display="none"; 
+    game.style.display="block"; 
     
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 10.5);
-
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 3px solid black;
-}
-/************************************************************************/
-
-#completed_game 
-{
-    margin: 10px auto;  
-    width: 1200px;  
-    height: 750px; /*  auto;  */
-    padding: 15px;
-    border: black;  
-
-    background:-webkit-linear-gradient(300deg, #588063, #000);
-    background:-moz-linear-gradient(top, #588063, #000);
-    background: linear-gradient(top, #588063, #000);
-
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;	
+    turnOffOverlay();
+    turnOffOverlayResult();
+    
+    var modeAndLevels = document.getElementById("modeAndLevels");
+    var mAndL = "";
+    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+        mAndL = "SD levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
+    }
+    if (gV.mode == gC.MODE_REGULAR) {
+        mAndL = "Regular levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
+    }
+    if (gV.mode == gC.MODE_QUICK) {
+        mAndL = "Quick levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
+    }
+    modeAndLevels.innerHTML = mAndL;
+        
+    startGame();
+    pauseButton.innerHTML = " Pause ";     
 }
 
-#completed_stage
-{
-    margin: 0px 0px; /* auto;  */
-    width: 1200px;
-    height: 600px;
-    position: relative;
+//The pause-resume button
+//var pauseButton = document.querySelector("#button");
+var pauseButton = document.getElementById("pauseButton");
+pauseButton.style.cursor = "pointer"; 
+pauseButton.addEventListener("click", clickHandler, false);
+pauseButton.style.padding = "5px 25px 5px 25px";  // t,r,b,l
 
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+//The begin button
+//var beginButton = document.querySelector("#beginButton");
+var beginButton = document.getElementById("beginButton");
+beginButton.style.cursor = "pointer";
+beginButton.addEventListener("click", introClickHandler, false);
+beginButton.style.padding = "5px 25px 5px 25px";  // t,r,b,l
 
-    margin-bottom: 20px;
-    border: 1px solid lime;
-}
-
-
-/************************************************************************/
-
-/* Popup container */
-.popup {
-    position: relative;
-    display: block;
-    /*display: inline-block; */
-    cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-    visibility: hidden;
-    width: 300px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-    margin-bottom: 300px;
-    font-size: 16px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-}
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 80) {  //The letter p shows/hides praise text
+        gV.showPraise = !gV.showPraise;
+    }
+});

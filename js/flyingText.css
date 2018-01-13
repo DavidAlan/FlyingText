@@ -120,10 +120,10 @@ button:active
 
 .modeAndLevels
 {
-    position: absolute;
+    position: relative;
     height: 18px;
-    top:   40px;
-    left:   1410px;
+    top:   35px;
+    left:   30px;   /*1410 */
     width: 170px;
     font-size: 16px;
     color: #FFBF00;  /* orange */   
@@ -151,7 +151,7 @@ button:active
 
 #overlayText{
     position: absolute; 
-    top: 45%;
+    top: 40%; /*  45%;  */
     left: 55%;
     font-size: 20px;
     color: white;
@@ -169,9 +169,6 @@ button:active
 }
 #overlayTextResult{
     position: absolute;  
-    
-    
-    
     color: white;
        
     background:-webkit-linear-gradient(300deg, #588063, #000);
