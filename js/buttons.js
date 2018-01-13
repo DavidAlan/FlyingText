@@ -17,9 +17,9 @@
 //  <https://www.gnu.org/licenses/>.
 }
 function clickHandler() {
-    pause = !pause;
-    if (pause) {
-        numberOfPauses++;
+    gV.pause = !gV.pause;
+    if (gV.pause) {
+        gV.numberOfPauses++;
         pauseGame();
     } else {
         resumeGame();
@@ -28,19 +28,19 @@ function clickHandler() {
 function pauseGame() {
     document.getElementById("pauseButton").style.padding = "5px 25px 5px 25px";  // t,r,b,ld
     pauseButton.innerHTML = " Resume "; 
-    gameState = PAUSED;
-    pause = true;
+    gV.gameState = gC.PAUSED;
+    gV.pause = true;
     //console.log("---------- Paused");
 }
 function resumeGame() {
     document.getElementById("pauseButton").style.display = "inline-block";
     document.getElementById("pauseButton").style.padding = "5px 37px 5px 36px";  // t,r,b,l
     pauseButton.innerHTML = "Pause"; 
-    gameState = PLAYING;
-    pause = false;
+    gV.gameState = gC.PLAYING;
+    gV.pause = false;
     turnOffOverlay();
     turnOffOverlayResult();
-    endOfLevel = false;
+    gV.endOfLevel = false;
     //console.log("---------- Resuming");
 }
 function hidePauseButton(){
@@ -52,78 +52,77 @@ function mousedownHandler(event) {
     var mouseY = event.layerY - canvas.offsetTop;
 }
 function introClickHandler() {
-    firstGameLevel = document.getElementById("beginLevel").options.selectedIndex;
-    lastGameLevel  = document.getElementById("endLevel").options.selectedIndex;
+    gV.firstGameLevel = document.getElementById("beginLevel").options.selectedIndex;
+    gV.lastGameLevel  = document.getElementById("endLevel").options.selectedIndex;
     
     //Validate begin and end level values
-    gameLevel  = firstGameLevel;
-    
-    if (firstGameLevel > lastGameLevel) {
-        gameLevel = 0;
-        firstGameLevel = 0;
-        lastGameLevel = MAX_GAME_LEVEL;
+    if (gV.firstGameLevel > gV.lastGameLevel) {
+        gV.gameLevel = 0;
+        gV.firstGameLevel = 0;
+        gV.lastGameLevel = gC.MAX_GAME_LEVEL;
     }
+    gV.gameLevel  = gV.firstGameLevel;
     
     document.getElementById("endLevel").selectedIndex = "13";
 
     if (document.getElementById("mode1").checked) {
         console.log("Mode: Quick");
-        mode = MODE_QUICK;
-        initialNbrOfFlyingObjects = 5;
-        ToAdvanceFromLevel1 = 5; 
-        ToAdvanceFromLevel2 = 5;
-        ToAdvanceFromLevel3 = 5;
-        ToAdvanceFromLevel4 = 5; 
-        ToAdvanceFromLevel5 = 5;
-        ToAdvanceFromLevel6 = 5;
-        ToAdvanceFromLevel7 = 5;
-        ToAdvanceFromLevel8 = 5;
-        ToAdvanceFromLevel9 = 5;
-        ToAdvanceFromLevel10 = 5;
-        ToAdvanceFromLevel11 = 5;
-        ToAdvanceFromLevel12 = 5;
-        ToAdvanceFromLevel13 = 5;
-        ToAdvanceFromLevel14 = 5;
+        gV.mode = gC.MODE_QUICK;
+        gV.initialNbrOfFlyingObjects = 5;
+        gV.ToAdvanceFromLevel1 = 5; 
+        gV.ToAdvanceFromLevel2 = 5;
+        gV.ToAdvanceFromLevel3 = 5;
+        gV.ToAdvanceFromLevel4 = 5; 
+        gV.ToAdvanceFromLevel5 = 5;
+        gV.ToAdvanceFromLevel6 = 5;
+        gV.ToAdvanceFromLevel7 = 5;
+        gV.ToAdvanceFromLevel8 = 5;
+        gV.ToAdvanceFromLevel9 = 5;
+        gV.ToAdvanceFromLevel10 = 5;
+        gV.ToAdvanceFromLevel11 = 5;
+        gV.ToAdvanceFromLevel12 = 5;
+        gV.ToAdvanceFromLevel13 = 5;
+        gV.ToAdvanceFromLevel14 = 5;
     }
     if (document.getElementById("mode2").checked) {
         console.log("Mode: Regular");
-        mode = MODE_REGULAR;
-        initialNbrOfFlyingObjects = getRandomNumber(4,8);
+        gV.mode = gC.MODE_REGULAR;
+        gV.initialNbrOfFlyingObjects = getRandomNumber(4,8);
     }
     if (document.getElementById("mode3").checked) {
         console.log("Mode: Sudden Death");
-        mode = MODE_SUDDEN_DEATH;
-        initialNbrOfFlyingObjects = getRandomNumber(4,8);
-        if (firstGameLevel != lastGameLevel){
-            ToAdvanceFromLevel1 = 7; 
-            ToAdvanceFromLevel2 = 7;
-            ToAdvanceFromLevel3 = 7;
-            ToAdvanceFromLevel4 = 7; 
-            ToAdvanceFromLevel5 = 7;
-            ToAdvanceFromLevel6 = 7;
-            ToAdvanceFromLevel7 = 7;
-            ToAdvanceFromLevel8 = 7;
-            ToAdvanceFromLevel9 = 7;
-            ToAdvanceFromLevel10 = 7;
-            ToAdvanceFromLevel11 = 7;
-            ToAdvanceFromLevel12 = 7;
-            ToAdvanceFromLevel13 = 7;
-            ToAdvanceFromLevel14 = 7;
+        gV.mode = gC.MODE_SUDDEN_DEATH;
+        gV.initialNbrOfFlyingObjects = getRandomNumber(4,8);
+        if (gV.firstGameLevel != gV.lastGameLevel){
+            gV.ToAdvanceFromLevel1 = 7;
+            gV.ToAdvanceFromLevel2 = 7;
+            gV.ToAdvanceFromLevel3 = 7;
+            gV.ToAdvanceFromLevel4 = 7;
+            gV.ToAdvanceFromLevel5 = 7;
+            gV.ToAdvanceFromLevel6 = 7;
+            gV.ToAdvanceFromLevel7 = 7;
+            gV.ToAdvanceFromLevel8 = 7;
+            gV.ToAdvanceFromLevel9 = 7;
+            gV.ToAdvanceFromLevel10 = 7;
+            gV.ToAdvanceFromLevel11 = 7;
+            gV.ToAdvanceFromLevel12 = 7;
+            gV.ToAdvanceFromLevel13 = 7;
+            gV.ToAdvanceFromLevel14 = 7;
         } else {
-            ToAdvanceFromLevel1 = 999; 
-            ToAdvanceFromLevel2 = 999;
-            ToAdvanceFromLevel3 = 999;
-            ToAdvanceFromLevel4 = 999; 
-            ToAdvanceFromLevel5 = 999;
-            ToAdvanceFromLevel6 = 999;
-            ToAdvanceFromLevel7 = 999;
-            ToAdvanceFromLevel8 = 999;
-            ToAdvanceFromLevel9 = 999;
-            ToAdvanceFromLevel10 = 999;
-            ToAdvanceFromLevel11 = 999;
-            ToAdvanceFromLevel12 = 999;
-            ToAdvanceFromLevel13 = 999;
-            ToAdvanceFromLevel14 = 999;
+            gV.ToAdvanceFromLevel1 = 999; 
+            gV.ToAdvanceFromLevel2 = 999;
+            gV.ToAdvanceFromLevel3 = 999;
+            gV.ToAdvanceFromLevel4 = 999; 
+            gV.ToAdvanceFromLevel5 = 999;
+            gV.ToAdvanceFromLevel6 = 999;
+            gV.ToAdvanceFromLevel7 = 999;
+            gV.ToAdvanceFromLevel8 = 999;
+            gV.ToAdvanceFromLevel9 = 999;
+            gV.ToAdvanceFromLevel10 = 999;
+            gV.ToAdvanceFromLevel11 = 999;
+            gV.ToAdvanceFromLevel12 = 999;
+            gV.ToAdvanceFromLevel13 = 999;
+            gV.ToAdvanceFromLevel14 = 999;
         }
     }
 
@@ -133,16 +132,16 @@ function introClickHandler() {
     turnOffOverlay();
     turnOffOverlayResult();
     
-    var modeAndLevels   = document.getElementById("modeAndLevels");
+    var modeAndLevels = document.getElementById("modeAndLevels");
     var mAndL = "";
-    if ( mode == MODE_SUDDEN_DEATH) {
-        mAndL = "SD levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+        mAndL = "SD levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
     }
-    if (mode == MODE_REGULAR) {
-        mAndL = "Regular levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    if (gV.mode == gC.MODE_REGULAR) {
+        mAndL = "Regular levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
     }
-    if (mode == MODE_QUICK) {
-        mAndL = "Quick levels: " + (firstGameLevel + 1) + "-" + (lastGameLevel + 1);
+    if (gV.mode == gC.MODE_QUICK) {
+        mAndL = "Quick levels: " + (gV.firstGameLevel + 1) + "-" + (gV.lastGameLevel + 1);
     }
     modeAndLevels.innerHTML = mAndL;
         
@@ -165,7 +164,7 @@ beginButton.addEventListener("click", introClickHandler, false);
 beginButton.style.padding = "5px 25px 5px 25px";  // t,r,b,l
 
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 80) {  //The letter p
-        showPraise = !showPraise;
+    if(event.keyCode == 80) {  //The letter p shows/hides praise text
+        gV.showPraise = !gV.showPraise;
     }
 });
