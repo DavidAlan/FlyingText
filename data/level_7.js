@@ -1,6 +1,6 @@
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
-//  http://software.dafreitag.com/
+//  http://software.dafreitagC.com/
 //
 //  This program is free software: you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_7] = "Function Call Statements";
-var LEVEL_7_ARRAY = 
+gV.levelTitle[gC.LEVEL_7] = "Function Call Statements";
+gV.levelArray7 = 
         ["x = calculateOutput( )#true#na" 
        ,"newValue = calcOutput(names)#true#na"    
        ,"x = displayOutput(names, points)#true#na"    
@@ -59,4 +59,4 @@ var LEVEL_7_ARRAY =
        ,'Module Integer displayOutput( )#false#This is an invalid module header'
         ];
 
-shuffle(LEVEL_7_ARRAY);
+gV.levelArray7 = shuffle(gV.levelArray7);

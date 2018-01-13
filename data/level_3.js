@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_3] = "Variables and Constants";
-var LEVEL_3_ARRAY = 
+gV.levelTitle[gC.LEVEL_3] = "Variables and Constants";
+gV.levelArray3 = 
         ["userName#true#na" 
        ,"heroName#true#na"    
        ,"userAge#true#na"    
@@ -92,5 +92,5 @@ var LEVEL_3_ARRAY =
        ,"i_love_this_game#false#Not camelCase. But thank you!"
         ];
 
-shuffle(LEVEL_3_ARRAY);
-shuffle(LEVEL_3_ARRAY);
+gV.levelArray3 = shuffle(gV.levelArray3);
+gV.levelArray3 = shuffle(gV.levelArray3);

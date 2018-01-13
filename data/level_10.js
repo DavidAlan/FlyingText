@@ -1,3 +1,4 @@
+
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,8 +16,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_10] = "Booleans";
-var LEVEL_10_ARRAY = 
+gV.levelTitle[gC.LEVEL_10] = "Booleans";
+gV.levelArray10 = 
         ["True#true#na" 
        ,"NOT False#true#na"    
        ,"True OR True#true#na"    
@@ -52,4 +53,4 @@ var LEVEL_10_ARRAY =
        ,"CLICK_ME!#false#Made you click!"    
         ];
 
-shuffle(LEVEL_10_ARRAY);
+gV.levelArray10 = shuffle(gV.levelArray10);

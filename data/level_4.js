@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_4] = "Expressions";
-var LEVEL_4_ARRAY = 
+gV.levelTitle[gC.LEVEL_4] = "Expressions";
+gV.levelArray4 = 
         ["x = 5#true#na" 
        ,"employee = number#true#na"    
        ,"employeeToProcess = employeeNumber#true#na"    
@@ -54,4 +54,4 @@ var LEVEL_4_ARRAY =
        ,"!$%#^@(*%&$!#false#What do you think this IS?"
         ];
 
-shuffle(LEVEL_4_ARRAY);
+gV.levelArray4 = shuffle(gV.levelArray4);

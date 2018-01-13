@@ -1,3 +1,4 @@
+
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,8 +16,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_13] = "Arrays";
-var LEVEL_13_ARRAY = 
+gV.levelTitle[gC.LEVEL_13] = "Arrays";
+gV.levelArray13 = 
         ["Declare Integer myArray[SIZE]#true#na" 
        ,"Declare String aNumber[100]#true#na" 
        ,"Declare String employees[MAX_EMPS]#true#na" 
@@ -63,4 +64,4 @@ var LEVEL_13_ARRAY =
        ,"CLICK_ME_AND_WIN_PRIZES!#false#You haven't been around much have you?"    
         ];
 
-shuffle(LEVEL_13_ARRAY);
+gV.levelArray13 = shuffle(gV.levelArray13);

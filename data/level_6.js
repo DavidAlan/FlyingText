@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_6] = "Module Headers";
-var LEVEL_6_ARRAY = 
+gV.levelTitle[gC.LEVEL_6] = "Module Headers";
+gV.levelArray6 = 
         ["Module displayOutput()#true#na" 
        ,"Module displayOutput(String names)#true#na"    
        ,"Module displayOutput(String names, Integer points)#true#na"    
@@ -64,4 +64,4 @@ var LEVEL_6_ARRAY =
        ,'Module getGoodJob(learnLots)#false#Missing varType in parameter'
         ];
 
-shuffle(LEVEL_6_ARRAY);
+gV.levelArray6 = shuffle(gV.levelArray6);

@@ -1,3 +1,4 @@
+
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,8 +16,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_9] = "Modules and Functions";
-var LEVEL_9_ARRAY = 
+gV.levelTitle[gC.LEVEL_9] = "Modules and Functions";
+gV.levelArray9 = 
         ["x = calculateOutput( )#true#na" 
        ,"newValue = calcOutput(names)#true#na"    
        ,"displayOutput(names, points)#true#na"    
@@ -120,5 +121,5 @@ var LEVEL_9_ARRAY =
        ,'Module earnA(doHomework)#false#Missing varType for parameter'  
         ];
 
-shuffle(LEVEL_9_ARRAY);
-shuffle(LEVEL_9_ARRAY);
+gV.levelArray9 = shuffle(gV.levelArray9);
+gV.levelArray9 = shuffle(gV.levelArray9);

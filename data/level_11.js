@@ -1,3 +1,4 @@
+
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,8 +16,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_11] = "If Statements";
-var LEVEL_11_ARRAY = 
+gV.levelTitle[gC.LEVEL_11] = "If Statements";
+gV.levelArray11 = 
         ["If x < MAX#true#na" 
        ,"If (x <= MAX - 1)#true#na"    
        ,"If (rows <= maxNbrOfRows - 1)#true#na"    
@@ -64,4 +65,4 @@ var LEVEL_11_ARRAY =
        ,'If (nbrOfPeople ~ 75)#false#Invalid operator'
         ];
 
-shuffle(LEVEL_11_ARRAY);
+gV.levelArray11 = shuffle(gV.levelArray11);

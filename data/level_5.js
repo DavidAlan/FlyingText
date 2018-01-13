@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_5] = "Module Call Statements";
-var LEVEL_5_ARRAY = 
+gV.levelTitle[gC.LEVEL_5] = "Module Call Statements";
+gV.levelArray5 = 
         ["displayOutput()#true#na" 
        ,"displayOutput(names)#true#na"    
        ,"displayOutput(names, points)#true#na"    
@@ -64,4 +64,4 @@ var LEVEL_5_ARRAY =
        ,'Function Integer getInteger(String message)#false#This is an invalid Module Header'
         ];
 
-shuffle(LEVEL_5_ARRAY);
+gV.levelArray5 = shuffle(gV.levelArray5);

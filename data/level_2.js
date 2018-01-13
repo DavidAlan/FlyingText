@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_2] = "Constants";
-var LEVEL_2_ARRAY = 
+gV.levelTitle[gC.LEVEL_2] = "Constants";
+gV.levelArray2 = 
         ["USER_NAME#true#na" 
        ,"USER_AGE#true#na"   
        ,"EMPLOYEE#true#na"    
@@ -52,7 +52,7 @@ var LEVEL_2_ARRAY =
        ,"employeeNbr#false#This is a variable"    
        ,"heroName#false#This is a variable"    
        ,"SchoolName#false#Not all CAPS"    
-       ,"clickMe!#false#Exclamation point not allowed"
+       ,"CLICK_ME!#false#Exclamation point not allowed"
        ,"4_STUDENTS#false#Should not start with a number"
        ,"mortgageRate#false#This is a variable"
        ,"HRdepartment#false#Not all CAPS"
@@ -60,11 +60,15 @@ var LEVEL_2_ARRAY =
        ,"CAPTAIN-FANTASTIC#false#Hyphens not allowed"
        ,"THISisAconstant#false#Not all CAPS"
        ,"numberOfPlayers#false#This is a variable"
+       ,"totalCost#false#This is a variable"
        ,"NAME-OF-PLAYER#false#Hyphens not allowed"
        ,"nbrOfZombies#false#This is a variable"
        ,"I-LIKE-PLAYING-THIS#false#Hyphens not allowed"
        ,"NBR-STUDENTS#false#Hyphens not allowed"
        ,"miles_per_hour#false#Not all CAPS"
+       ,"HOGWARTS-RULES#false#Hyphens not allowed"
+       ,"NBR-DRAGONS#false#Hyphens not allowed"
+       ,"NBR-OF-UNICORNS#false#Hyphens not allowed"
         ];
 
-shuffle(LEVEL_2_ARRAY);
+gV.levelArray2 = shuffle(gV.levelArray2);

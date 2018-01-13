@@ -1,3 +1,4 @@
+
 //  Catch Flying Text program
 //  Copyright (c) 2017 David A. Freitag 
 //  http://software.dafreitag.com/
@@ -15,8 +16,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_12] = "Loops";
-var LEVEL_12_ARRAY = 
+gV.levelTitle[gC.LEVEL_12] = "Loops";
+gV.levelArray12 = 
         ["Do#true#na" 
        ,"While (wantsToContinue)#true#na"    
        
@@ -62,4 +63,4 @@ var LEVEL_12_ARRAY =
        ,"While goldCoins > #false#Missing condition"    
         ];
 
-shuffle(LEVEL_12_ARRAY);
+gV.levelArray12 = shuffle(gV.levelArray12);

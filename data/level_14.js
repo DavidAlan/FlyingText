@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_14] = "OOP Terms";
-var LEVEL_14_ARRAY = 
+gV.levelTitle[gC.LEVEL_14] = "OOP Terms";
+gV.levelArray14 = 
         ["Encapsulation#true#na" 
        ,"Inheritance#true#na" 
        ,"Object Oriented Programming#true#na" 
@@ -79,4 +79,4 @@ var LEVEL_14_ARRAY =
        ,"is-a relationship clock#false#Clock? Really?"    
         ];
 
-shuffle(LEVEL_14_ARRAY);
+gV.levelArray14 = shuffle(gV.levelArray14);

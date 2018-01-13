@@ -15,8 +15,8 @@
 //  To receive a copy of the GNU General Public License, see
 //  <https://www.gnu.org/licenses/>.
 
-levelTitle[LEVEL_8] = "Function Headers";
-var LEVEL_8_ARRAY = 
+gV.levelTitle[gC.LEVEL_8] = "Function Headers";
+gV.levelArray8 = 
         ["Function Integer calculateOutput()#true#na" 
        ,"Function Boolean calcOutput(names)#true#na"    
        ,"Function Real displayOutput(names, points)#true#na"    
@@ -57,4 +57,4 @@ var LEVEL_8_ARRAY =
        ,'Module Integer displayOutput()#false#Module should be Function'
         ];
 
-shuffle(LEVEL_8_ARRAY);
+gV.levelArray8 = shuffle(gV.levelArray8);
