@@ -17,7 +17,7 @@
 //  <https://www.gnu.org/licenses/>.
 }
 function turnOnOverlayResult(xPos, yPos) {
-    if (!showPraise) return;
+    if (!gV.showPraise) return;
     var CONGRATS_TEXT_ARRAY = 
         ["Well Done!"
         ,"Good Job!"    

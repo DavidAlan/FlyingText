@@ -17,38 +17,29 @@
 //  <https://www.gnu.org/licenses/>.
 }
 function turnOnOverlay(textNbr) {
-    var text = "TBD";
     switch(textNbr){
         case 1: 
-        default:
-            text = "Welcome!<br><br>" 
-            + "Can you identify correct pseudocode syntax?<br>"
-            + "Do you know the difference between variables and constants?<br><br>"
-            + "Play this game to test your knowledge!<br><br>"
-            + "<HR / ><br>"
-            + "Lose points for letting a good statement go by or for clicking on bad syntax.<br>"
-            + "And the more you pause the game, the more your score is reduced.<br>"
-            + "<br>"
-            + "When playing, press the letter 'p' to to toggle Praise on or off.<br>"
-            + "<br>"
-            + "Choose from the options below and, when you are ready, <br>"
-            + "click the Begin button to start the game.";
+        default: //Welcome message on first screen 
+            gV.textMessage = gC.WELCOME_MESSAGE;
             break;
-        case 2: 
-            if (mode === MODE_SUDDEN_DEATH){
-                text = "Congratulations on surviving for at least a little while!<br><br>" 
+        case 2: //Game is finished
+            if (gV.mode === gC.MODE_SUDDEN_DEATH){
+                gV.textMessage = "Congratulations on surviving for at least a little while!"
+                + "<br><br>"
+                + "FYI... " + gV.errorText
+                + "<br>"
+                + gV.errorMessage
+                + "<br><br>"
                 + "Note your score below and try to beat it.<br><br>"
                 + "Refresh the screen to play again.";
                 
             } else {
-                text = "Congratulations!<br><br>" 
-                + "Note your score below and try to beat it.<br><br>"
-                + "Refresh the screen to play again.";
+                turnOnGameFinishedOverlay();
             }
             break;
     }
     var overlayText = document.getElementById("overlayText");
-    overlayText.innerHTML = text;
+    overlayText.innerHTML = gV.textMessage;
 
     document.getElementById("overlay").style.display = "block";
 }
@@ -56,7 +47,7 @@ function turnOffOverlay() {
     document.getElementById("overlay").style.display = "none";
 }
 function turnOnGameFinishedOverlay() {
-    if (playerTotalPoints >= 5) {
+    if (gV.playerTotalPoints >= 5) {
         displayGoodJobMessage();
     } else {
         displayCouldDoBetterMessage();
@@ -100,24 +91,44 @@ function displayGoodJobMessage() {
         ];    
         
     
-    var text = CONGRATS_TEXT_ARRAY_1[getRandomNumber(1, CONGRATS_TEXT_ARRAY_1.length - 1)]
+        gV.textMessage = CONGRATS_TEXT_ARRAY_1[getRandomNumber(1, CONGRATS_TEXT_ARRAY_1.length - 1)]
              + "<br>"
              + CONGRATS_TEXT_ARRAY_2[getRandomNumber(1, CONGRATS_TEXT_ARRAY_2.length - 1)]
              + "<br><br>(Refresh this page to start over.)";
     
+    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+        gV.textMessage = CONGRATS_TEXT_ARRAY_1[getRandomNumber(1, CONGRATS_TEXT_ARRAY_1.length - 1)]
+            + "<br><br>"
+            + "FYI... " + gV.errorText
+            + "<br>"
+            + gV.errorMessage
+            + "<br><br>"
+            + CONGRATS_TEXT_ARRAY_2[getRandomNumber(1, CONGRATS_TEXT_ARRAY_2.length - 1)]
+            + "<br><br>"
+            + "Refresh this page and try again!";
+    } 
+
     var overlayText = document.getElementById("overlayText");
-    overlayText.innerHTML = text;
+    overlayText.innerHTML = gV.textMessage;
 
     document.getElementById("overlay").style.display = "block";
 }
 function displayCouldDoBetterMessage() {    
-    
-    var text = "Nice work, but you could do better."
-            + "<br>"
-            + "Refresh this page and try again!";
-    
+    if (gV.mode == gC.MODE_SUDDEN_DEATH) {
+        gV.textMessage = "Nice work, but you could do better."
+        + "<br><br>"
+        + "FYI... " + gV.errorText
+        + "<br>"
+        + gV.errorMessage
+        + "<br><br>"
+        + "Refresh this page and try again!";
+    } else {
+        gV.textMessage = "Nice work, but you could do better."
+                + "<br>"
+                + "Refresh this page and try again!";
+    }
     var overlayText = document.getElementById("overlayText");
-    overlayText.innerHTML = text;
+    overlayText.innerHTML = gV.textMessage;
 
     document.getElementById("overlay").style.display = "block";
 }

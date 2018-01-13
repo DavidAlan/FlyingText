@@ -28,28 +28,28 @@ function update() {
     //Set this update function to loop at 60 frames per second
     requestAnimationFrame(update, canvas);
 
-    switch(gameState) {
-        case PLAYING:
+    switch(gV.gameState) {
+        case gC.PLAYING:
             playGame();
             //render();
             break;
             
-        case PAUSED:
-            if (endOfLevel) {
+        case gC.PAUSED:
+            if (gV.endOfLevel) {
                  turnOnEndOfLevelOverlay();
             }
             break;
         //    
-        case OVER: 
-            levelPlusPoints [gameLevel] = playerPlusPoints;  
-            levelMinusPoints[gameLevel] = playerMinusPoints; 
+        case gC.OVER: 
+            gV.levelPlusPoints [gV.gameLevel] = gV.playerPlusPoints;  
+            gV.levelMinusPoints[gV.gameLevel] = gV.playerMinusPoints; 
             calculatePoints();
             turnOnGameFinishedOverlay();
             endGame();
-            gameState = STOP;
+            gV.gameState = gC.STOP;
             break;
             
-        case STOP: 
+        case gC.STOP: 
         default:
             break;
     }
@@ -62,43 +62,43 @@ function render() {
     updateScores(); 
 
     pageTitle   = document.getElementById("gameLevelText");
-    pageTitle.innerHTML = titleText;
+    pageTitle.innerHTML = gV.titleText;
     
-    if (endOfLevel) {
+    if (gV.endOfLevel) {
          turnOnEndOfLevelOverlay();
     }
 }
 function updateScores() {
-    playerPlusScore.innerHTML  = playerPlusPoints;
-    playerMinusScore.innerHTML = playerMinusPoints;
-    playerLevelScore.innerHTML = playerPlusPoints + playerMinusPoints;
+    playerPlusScore.innerHTML  = gV.playerPlusPoints;
+    playerMinusScore.innerHTML = gV.playerMinusPoints;
+    playerLevelScore.innerHTML = gV.playerPlusPoints + gV.playerMinusPoints;
         
     var tempPlayerTotalPoints = 
-              playerTotalPoints 
-            + playerPlusPoints 
-            + playerMinusPoints
-            + playerMinusPoints;
+          gV.playerTotalPoints 
+        + gV.playerPlusPoints 
+        + gV.playerMinusPoints
+        + gV.playerMinusPoints;
     
     playerTotalScore.innerHTML = tempPlayerTotalPoints;
 }
 function playGame() {
     updateFlyingObjects();
     
-    if (gameState == STOP){
-        levelPlusPoints [gameLevel] = playerPlusPoints;  
-        levelMinusPoints[gameLevel] = playerMinusPoints; 
+    if (gV.gameState == gC.STOP){
+        gV.levelPlusPoints [gV.gameLevel] = gV.playerPlusPoints;  
+        gV.levelMinusPoints[gV.gameLevel] = gV.playerMinusPoints; 
         endGame();
         return;
     }
     
-    if((playerPlusPoints + playerMinusPoints) >= pointsNeededToAdvanceToNextLevel) {
-        levelPlusPoints [gameLevel] = playerPlusPoints;  
-        levelMinusPoints[gameLevel] = playerMinusPoints; 
+    if((gV.playerPlusPoints + gV.playerMinusPoints) >= gV.pointsNeededToAdvanceToNextLevel) {
+        gV.levelPlusPoints [gV.gameLevel] = gV.playerPlusPoints;  
+        gV.levelMinusPoints[gV.gameLevel] = gV.playerMinusPoints; 
         
-        gameLevel++;
-        endOfLevel = true;
+        gV.gameLevel++;
+        gV.endOfLevel = true;
         
-        if (gameLevel <= lastGameLevel) {
+        if (gV.gameLevel <= gV.lastGameLevel) {
             setTitleText();
             initializeLevel();
             pauseGame();
@@ -107,14 +107,14 @@ function playGame() {
             calculatePoints();
             turnOnGameFinishedOverlay();
             endGame();
-            gameState = STOP;
+            gV.gameState = gC.STOP;
         }
     } else {
         render(); 
     }
 }
 function endGame() {
-    gameState = STOP;
+    gV.gameState = gC.STOP;
     
     game.style.display="none";
 
@@ -122,68 +122,121 @@ function endGame() {
 
     var level0text  = document.getElementById("scoresLevel_0");
     level0text.innerHTML = 
-            + levelPlusPoints[0]  + " - "
-            + (levelMinusPoints[0] * -1);
+            + gV.levelPlusPoints[0]  + " - "
+            + (gV.levelMinusPoints[0] * -1);
     var level_1_text  = document.getElementById("scoresLevel_1");
-    level_1_text.innerHTML = 
-            + levelPlusPoints[1]  + " - "
-            + (levelMinusPoints[1] * -1);
     var level_2_text  = document.getElementById("scoresLevel_2");
-    level_2_text.innerHTML = 
-            + levelPlusPoints[2]  + " - "
-            + (levelMinusPoints[2] * -1);
     var level_3_text  = document.getElementById("scoresLevel_3");
-    level_3_text.innerHTML = 
-            + levelPlusPoints[3]  + " - "
-            + (levelMinusPoints[3] * -1);
     var level_4_text  = document.getElementById("scoresLevel_4");
-    level_4_text.innerHTML = 
-            + levelPlusPoints[4]  + " - "
-            + (levelMinusPoints[4] * -1);
     var level_5_text  = document.getElementById("scoresLevel_5");
-    level_5_text.innerHTML = 
-            + levelPlusPoints[5]  + " - "
-            + (levelMinusPoints[5] * -1);
     var level_6_text  = document.getElementById("scoresLevel_6");
-    level_6_text.innerHTML = 
-            + levelPlusPoints[6]  + " - "
-            + (levelMinusPoints[6] * -1);
     var level_7_text  = document.getElementById("scoresLevel_7");
-    level_7_text.innerHTML = 
-            + levelPlusPoints[7]  + " - "
-            + (levelMinusPoints[7] * -1);
     var level_8_text  = document.getElementById("scoresLevel_8");
-    level_8_text.innerHTML = 
-            + levelPlusPoints[8]  + " - "
-            + (levelMinusPoints[8] * -1);
     var level_9_text  = document.getElementById("scoresLevel_9");
-    level_9_text.innerHTML = 
-            + levelPlusPoints[9]  + " - "
-            + (levelMinusPoints[9] * -1);
     var level_10_text  = document.getElementById("scoresLevel_10"); 
-    level_10_text.innerHTML = 
-            + levelPlusPoints[10]  + " - "
-            + (levelMinusPoints[10] * -1);
     var level_11_text  = document.getElementById("scoresLevel_11");
-    level_11_text.innerHTML = 
-            + levelPlusPoints[11]  + " - "
-            + (levelMinusPoints[11] * -1);
-    var level_12_text  = document.getElementById("scoresLevel_12");
-    level_12_text.innerHTML = 
-            + levelPlusPoints[12]  + " - "
-            + (levelMinusPoints[12] * -1);
+    var level_12_text  = document.getElementById("scoresLevel_12");    
     var level_13_text  = document.getElementById("scoresLevel_13");
-    level_13_text.innerHTML = 
-            + levelPlusPoints[13]  + " - "
-            + (levelMinusPoints[13] * -1);
+    
+    if (gC.MAX_GAME_LEVEL > 1) {
+        level_1_text.innerHTML = 
+            + gV.levelPlusPoints[1]  + " - "
+            + (gV.levelMinusPoints[1] * -1);
+    } else {
+        level_1_text.innerHTML = "";
+    }
+    if (gC.MAX_GAME_LEVEL > 2) {
+        level_2_text.innerHTML = 
+            + gV.levelPlusPoints[2]  + " - "
+            + (gV.levelMinusPoints[2] * -1);
+    } else {
+        level_2_text.innerHTML = "";
+    }  
+    if (gC.MAX_GAME_LEVEL > 3) {
+        level_3_text.innerHTML = 
+            + gV.levelPlusPoints[3]  + " - "
+            + (gV.levelMinusPoints[3] * -1);
+    } else {
+        level_3_text.innerHTML = "";
+    }       
+    if (gC.MAX_GAME_LEVEL > 4) {
+        level_4_text.innerHTML = 
+            + gV.levelPlusPoints[4]  + " - "
+            + (gV.levelMinusPoints[4] * -1);
+    } else {
+        level_4_text.innerHTML = "";
+    }           
+    if (gC.MAX_GAME_LEVEL > 5) { 
+        level_5_text.innerHTML = 
+            + gV.levelPlusPoints[5]  + " - "
+            + (gV.levelMinusPoints[5] * -1);
+    } else {
+        level_5_text.innerHTML = "";
+    } 
+    if (gC.MAX_GAME_LEVEL > 6) { 
+        level_6_text.innerHTML = 
+            + gV.levelPlusPoints[6]  + " - "
+            + (gV.levelMinusPoints[6] * -1);
+    } else {
+        level_6_text.innerHTML = "";
+    } 
+    if (gC.MAX_GAME_LEVEL > 7) { 
+        level_7_text.innerHTML = 
+            + gV.levelPlusPoints[7]  + " - "
+            + (gV.levelMinusPoints[7] * -1);
+    } else {
+        level_7_text.innerHTML = "";
+    }  
+    if (gC.MAX_GAME_LEVEL > 8) { 
+        level_8_text.innerHTML = 
+            + gV.levelPlusPoints[8]  + " - "
+            + (gV.levelMinusPoints[8] * -1);
+    } else {
+        level_8_text.innerHTML = "";
+    }    
+    if (gC.MAX_GAME_LEVEL > 9) {   
+        level_9_text.innerHTML = 
+            + gV.levelPlusPoints[9]  + " - "
+            + (gV.levelMinusPoints[9] * -1);
+    } else {
+        level_9_text.innerHTML = "";
+    } 
+    if (gC.MAX_GAME_LEVEL > 10) {   
+        level_10_text.innerHTML = 
+            + gV.levelPlusPoints[10]  + " - "
+            + (gV.levelMinusPoints[10] * -1);
+    } else {
+        level_10_text.innerHTML = "";
+    }
+    if (gC.MAX_GAME_LEVEL > 11) { 
+        level_11_text.innerHTML = 
+            + gV.levelPlusPoints[11]  + " - "
+            + (gV.levelMinusPoints[11] * -1);
+    } else {
+        level_11_text.innerHTML = "";
+    }      
+    if (gC.MAX_GAME_LEVEL > 12) { 
+        level_12_text.innerHTML = 
+            + gV.levelPlusPoints[12]  + " - "
+            + (gV.levelMinusPoints[12] * -1);
+    } else {
+        level_12_text.innerHTML = "";
+    } 
+    if (gC.MAX_GAME_LEVEL > 13) { 
+        level_13_text.innerHTML = 
+            + gV.levelPlusPoints[13]  + " - "
+            + (gV.levelMinusPoints[13] * -1);
+    } else {
+        level_13_text.innerHTML = "";
+    }    
     
     var pauses_nbr  = document.getElementById("pausesNbr");
-    pauses_nbr.innerHTML = numberOfPauses;
+    pauses_nbr.innerHTML = gV.numberOfPauses;
     
     var total_pauses  = document.getElementById("totalPauses");
     total_pauses.innerHTML = "Pauses during the game divided by "
-            + PAUSE_FACTOR
-            + " means  -" + Math.floor(numberOfPauses / PAUSE_FACTOR)
+            + gC.PAUSE_FACTOR
+            + " means  -" + Math.floor(gV.numberOfPauses / gC.PAUSE_FACTOR)
             + "  point(s) deducted from the total";
 
     var level_total_text1  = document.getElementById("adjustedText1");
@@ -193,9 +246,8 @@ function endGame() {
     level_total_text2.innerHTML = "(doubling the negatives from each level)";
 
     var level_total_text  = document.getElementById("scoresLevel_total");
-    level_total_text.innerHTML = playerTotalPoints;
-    
-    
+    level_total_text.innerHTML = gV.playerTotalPoints;
+        
     document.getElementById("beginButton").style.display = "none";
     document.getElementById("beginLevelText").style.display = "none";
     document.getElementById("beginLevel").style.display = "none";
@@ -203,152 +255,152 @@ function endGame() {
     document.getElementById("endLevel").style.display = "none";
     document.getElementById("modeTypes").style.display = "none";
     
-    turnOverlayOn(2);
+    turnOnOverlay(2);
 }
 function calculatePoints() {
-    console.log("\n playerTotalPoints: " + playerTotalPoints
-            + "\n playerPlusPoints: " + playerPlusPoints
-            + "\n playerMinusPoints: " + playerMinusPoints
-            + "\n playerMinusPoints: " + playerMinusPoints   //Subtract twice to penalize player 
-            + "\n Math.floor(numberOfPauses / " + PAUSE_FACTOR +"): " 
-            + Math.floor(numberOfPauses / PAUSE_FACTOR)
+    console.log("\n playerTotalPoints: " + gV.playerTotalPoints
+            + "\n playerPlusPoints: "  + gV.playerPlusPoints
+            + "\n playerMinusPoints: " + gV.playerMinusPoints
+            + "\n playerMinusPoints: " + gV.playerMinusPoints   //Subtract twice to penalize player 
+            + "\n Math.floor(numberOfPauses / " + gC.PAUSE_FACTOR +"): " 
+            + Math.floor(gV.numberOfPauses / gC.PAUSE_FACTOR)
     );
       
     //Include the last level in the totals and the number of pauses
-    playerTotalPoints = 
-              playerTotalPoints 
-            + playerPlusPoints 
-            + playerMinusPoints
-            + playerMinusPoints   //Subtract twice to penalize player 
-            - Math.floor(numberOfPauses / PAUSE_FACTOR);
+    gV.playerTotalPoints = 
+          gV.playerTotalPoints 
+        + gV.playerPlusPoints 
+        + gV.playerMinusPoints
+        + gV.playerMinusPoints   //Subtract twice to penalize player 
+        - Math.floor(gV.numberOfPauses / gC.PAUSE_FACTOR);
 }
 function setTitleText() {
-    switch(gameLevel) {
-        case LEVEL_1: 
-            titleText = "Level " + (LEVEL_1 + 1) 
-                    + " - Click: Good " + levelTitle[LEVEL_1];
-            levelArray = LEVEL_1_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel1;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel1;
+    switch(gV.gameLevel) {
+        case gC.LEVEL_1: 
+            gV.titleText = "Level " + (gC.LEVEL_1 + 1) 
+                    + " - Click: Good " + gV.levelTitle[gC.LEVEL_1];
+            gV.levelArray = gV.levelArray1;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel1;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel1;
             break;
-        case LEVEL_2: 
-            titleText = "Level " + (LEVEL_2 + 1)
-                    + " - Click: Good " + levelTitle[LEVEL_2];
-            levelArray = LEVEL_2_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel2;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel2;
+        case gC.LEVEL_2: 
+            gV.titleText = "Level " + (gC.LEVEL_2 + 1)
+                    + " - Click: Good " + gV.levelTitle[gC.LEVEL_2];
+            gV.levelArray = gV.levelArray2;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel2;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel2;
             break;
-        case LEVEL_3: 
-            titleText = "Level " + (LEVEL_3 + 1)
-                    + " - Click: Good " + levelTitle[LEVEL_3];
-            levelArray = LEVEL_3_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel3;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel3;
+        case gC.LEVEL_3: 
+            gV.titleText = "Level " + (gC.LEVEL_3 + 1)
+                    + " - Click: Good " + gV.levelTitle[gC.LEVEL_3];
+            gV.levelArray = gV.levelArray3;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel3;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel3;
             break;
-        case LEVEL_4: 
-            titleText = "Level " + (LEVEL_4 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_4];
-            levelArray = LEVEL_4_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel4;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel4;
+        case gC.LEVEL_4: 
+            gV.titleText = "Level " + (gC.LEVEL_4 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_4];
+            gV.levelArray = gV.levelArray4;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel4;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel4;
             break;
-        case LEVEL_5: 
-            titleText = "Level " + (LEVEL_5 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_5];
-            levelArray = LEVEL_5_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel5;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel6;
+        case gC.LEVEL_5: 
+            gV.titleText = "Level " + (gC.LEVEL_5 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_5];
+            gV.levelArray = gV.levelArray5;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel5;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel6;
             break;
-        case LEVEL_6: 
-            titleText = "Level " + (LEVEL_6 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_6];
-            levelArray = LEVEL_6_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel6;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel6;
+        case gC.LEVEL_6: 
+            gV.titleText = "Level " + (gC.LEVEL_6 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_6];
+            gV.levelArray = gV.levelArray6;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel6;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel6;
             break;
-        case LEVEL_7: 
-            titleText = "Level " + (LEVEL_7 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_7];
-            levelArray = LEVEL_7_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel7;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel7;
+        case gC.LEVEL_7: 
+            gV.titleText = "Level " + (gC.LEVEL_7 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_7];
+            gV.levelArray = gV.levelArray7;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel7;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel7;
             break;
-        case LEVEL_8: 
-            titleText = "Level " + (LEVEL_8 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_8];
-            levelArray = LEVEL_8_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel8;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel8;
+        case gC.LEVEL_8: 
+            gV.titleText = "Level " + (gC.LEVEL_8 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_8];
+            gV.levelArray = gV.levelArray8;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel8;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel8;
             break;
-        case LEVEL_9: 
-            titleText = "Level " + (LEVEL_9 + 1)
-                    + " - Click: " + levelTitle[LEVEL_9];
-            levelArray = LEVEL_9_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel9;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel9;
+        case gC.LEVEL_9: 
+            gV.titleText = "Level " + (gC.LEVEL_9 + 1)
+                    + " - Click: " + gV.levelTitle[gC.LEVEL_9];
+            gV.levelArray = gV.levelArray9;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel9;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel9;
             break;
-        case LEVEL_10: 
-            titleText = "Level " + (LEVEL_10 + 1)
-                    + " - Click:  " + levelTitle[LEVEL_10] + EXTRA_TEXT_LEVEL_10;
-            levelArray = LEVEL_10_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel10;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel10;
+        case gC.LEVEL_10: 
+            gV.titleText = "Level " + (gC.LEVEL_10 + 1)
+                    + " - Click:  " + gV.levelTitle[gC.LEVEL_10] + gC.EXTRA_TEXT_LEVEL_10;
+            gV.levelArray = gV.levelArray10;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel10;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel10;
             break;
-        case LEVEL_11: 
-            titleText = "Level " + (LEVEL_11 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_11];
-            levelArray = LEVEL_11_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel11;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel11;
+        case gC.LEVEL_11: 
+            gV.titleText = "Level " + (gC.LEVEL_11 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_11];
+            gV.levelArray = gV.levelArray11;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel11;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel11;
             break;
-        case LEVEL_12: 
-            titleText = "Level " + (LEVEL_12 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_12];
-            levelArray = LEVEL_12_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel12;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel12;
+        case gC.LEVEL_12: 
+            gV.titleText = "Level " + (gC.LEVEL_12 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_12];
+            gV.levelArray = gV.levelArray12;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel12;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel12;
             break;
-        case LEVEL_13: 
-            titleText = "Level " + (LEVEL_13 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_13];
-            levelArray = LEVEL_13_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel13;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel13;
+        case gC.LEVEL_13: 
+            gV.titleText = "Level " + (gC.LEVEL_13 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_13];
+            gV.levelArray = gV.levelArray13;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel13;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel13;
             break;
-        case LEVEL_14: 
-            titleText = "Level " + (LEVEL_14 + 1)
-                    + " - Click: Valid " + levelTitle[LEVEL_14];
-            levelArray = LEVEL_14_ARRAY;
-            pointsNeededToAdvanceToNextLevel = ToAdvanceFromLevel14;
-            playerOutOfScore.innerHTML = ToAdvanceFromLevel14;
+        case gC.LEVEL_14: 
+            gV.titleText = "Level " + (gC.LEVEL_14 + 1)
+                    + " - Click: Valid " + gV.levelTitle[gC.LEVEL_14];
+            gV.levelArray = gV.levelArray14;
+            gV.pointsNeededToAdvanceToNextLevel = gV.ToAdvanceFromLevel14;
+            playerOutOfScore.innerHTML = gV.ToAdvanceFromLevel14;
             break;
 
         default:
-            titleText = "not defined";
+            gV.titleText = "not defined";
             break;
     }   
 }
 function initializeLevel() {
-    playerTotalPoints = 
-              playerTotalPoints 
-            + playerPlusPoints 
-            + playerMinusPoints
-            + playerMinusPoints;
+    gV.playerTotalPoints = 
+          gV.playerTotalPoints 
+        + gV.playerPlusPoints 
+        + gV.playerMinusPoints
+        + gV.playerMinusPoints;
     
-    for (var j = 0; j < MAX_FLYING_OBJECTS; j++) {
-        flyingObjectArray[j].visible = false;
-        flyingObjectArray[j].y = 999; 
-        flyingObjectArray[j].ySlot = 999;
+    for (var j = 0; j < gC.MAX_FLYING_OBJECTS; j++) {
+        f.flyingObjectArray[j].visible = false;
+        f.flyingObjectArray[j].y = 999; 
+        f.flyingObjectArray[j].ySlot = 999;
     }
     
-    for (var z = 0; z < MAX_FLYING_OBJECTS; z++){
-        yActiveSlot[z] = false;
+    for (var z = 0; z < gC.MAX_FLYING_OBJECTS; z++) {
+        f.yActiveSlot[z] = false;
     }
     initializeFlyingObjects();
     
-    playerPlusPoints  = 0;
-    playerMinusPoints = 0;
-    playerLevelPoints = 0;
+    gV.playerPlusPoints  = 0;
+    gV.playerMinusPoints = 0;
+    gV.playerLevelPoints = 0;
 }
 function getRandomNumber (low, high) {
     var randomNbr = (Math.floor(Math.random() * ((high + 1) - low)) + low);
